@@ -225,6 +225,8 @@ GameObject:
   - component: {fileID: 6260658875756805855}
   - component: {fileID: 4675530157904216181}
   - component: {fileID: 4226320898784612850}
+  - component: {fileID: 6724313588151942277}
+  - component: {fileID: 3575746565149121059}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -329,6 +331,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d8b304c9d25da488200c098d6d5b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_Billboard
+--- !u!114 &6724313588151942277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4261412695334374876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a46abb7772a30f4e8224938f8df3af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldHPView
+  _hpSlider: {fileID: 4250055752721901362}
+  _nameText: {fileID: 1642782214868660675}
+--- !u!114 &3575746565149121059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4261412695334374876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a3f83795232a54782d00103d7b4539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldHPPresenter
+  _view: {fileID: 6724313588151942277}
+  _stat: {fileID: 6507041873999971818}
+  _data: {fileID: 0}
 --- !u!1 &5983181979282885769
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +511,7 @@ GameObject:
   - component: {fileID: 4269611873941324466}
   - component: {fileID: 702834450106528201}
   - component: {fileID: 3069796688563442396}
+  - component: {fileID: 4870188770053609064}
   m_Layer: 7
   m_Name: Magicain_Player
   m_TagString: Player
@@ -713,7 +745,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player_NetworkSpawn
   ShowTopMostFoldoutHeaderGroup: 1
   canvas: {fileID: 4073698129115108413}
-  ClientText: {fileID: 3519358533100021401}
 --- !u!114 &1088455814805586593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,7 +843,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUDBinder
   ShowTopMostFoldoutHeaderGroup: 1
-  _hpTopSlider: {fileID: 4250055752721901362}
 --- !u!114 &702834450106528201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,6 +883,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822786ba6ff2e745a17a4a71717a9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDamage
+--- !u!114 &4870188770053609064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7576251448233022070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37709ea2bf62ca4b91e0a4ece7a501e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillCaster
+  ShowTopMostFoldoutHeaderGroup: 1
+  _skills:
+  - type: 0
+    data: {fileID: 11400000, guid: ee90e67a8ed649d4e9e02d43441f34de, type: 2}
+  - type: 1
+    data: {fileID: 11400000, guid: 7824e62328a64f3aaf5818b1c3f1d5e1, type: 2}
+  - type: 2
+    data: {fileID: 11400000, guid: 477143663ce74237b977f2909193eceb, type: 2}
 --- !u!1 &8304582804339889416
 GameObject:
   m_ObjectHideFlags: 0

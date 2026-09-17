@@ -29,12 +29,15 @@
 - 코드와 에셋 탐색은 `Assets/`에서 시작하고, 아래 경로를 우선 확인한다.
 - 프로젝트 전체를 무차별적으로 탐색하지 않는다. `Library/PackageCache`와 작업에 무관한 VFX 파일 등은 기본 탐색 범위에서 제외한다.
 - `TASK.md`, `PLAN.md` 등 Markdown 문서는 워크트리 루트를 기준으로 찾는다.
+- `.prefab`, `.unity`, 대형 `.asset` YAML은 전체 내용이 반드시 필요한 경우가 아니면 통째로 읽지 않는다.
+- Unity Editor API로 필요한 컴포넌트·직렬화 필드만 조회하거나 `rg -n -C`로 필요한 구간만 확인한다.
+- 변경 검증은 대상 필드 조회, 제한된 diff, `git diff --stat`을 우선한다.
 
 | 대상 | 우선 탐색 경로 |
 |---|---|
 | 스크립트 | `Assets/Script` |
-| 프리팹 | `Assets/Prefabs` |
-| 데이터(ScriptableObject) | `Assets/Resources/Data` |
+| 프리팹 | `Assets/Resources/Prefabs` |
+| 데이터(ScriptableObject) | `Assets/Asset/Data` |
 | 애니메이션 | `Assets/Animation` |
 | Animator Controller | `Assets/Animator` |
 | 씬 | `Assets/Scenes` |

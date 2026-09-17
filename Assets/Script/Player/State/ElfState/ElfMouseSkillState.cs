@@ -2,38 +2,28 @@ using UnityEngine;
 
 public class ElfMouseSkillState : EntityState
 {
-    
+    Elf_Player _player;
     EntityAnimator _aniController;
-    IHitter _hitter;
     IEntityMovement _move;
     IEntityRotate _rotate;
-    IEffector _effector;
-    Stat _stat;
     private StateMachine _upperStateMachine;
-
-    Vector3 vCentor = new Vector3(0f,0.25f,0.0f);
-    Vector3 vHalfExtents = new Vector3(1f,0.25f,1f);
 
     const float fDashSpeed = 10f;
     const float fDashDistance = 3f;
-    const float fHitDuration = 0.2f;   // 판정 지속시간(초)
 
     public ElfMouseSkillState(Elf_Player player)
     {
+        _player = player;
         _aniController = player._aniController;
-        _hitter = player._hitter;
         _move = player._move;
         _rotate = player._rotate;
-        _effector = player._effector;
-        _stat = player._stat;
         _upperStateMachine = player._upperStateMachine;
     }
     public override void Create()
     {
         TransitionList.Add(new StateToIdle_Player(_aniController));
         StateEvents.Add((0.25f , EventFunc));
-        StateEvents.Add((0.75f , () => _effector.PlayEffect((int)ELF.ElfEffect.MOUSE_SKILL)));
-        StateEvents.Add((0.75f , () => _hitter.DoHitCheck(vCentor , vHalfExtents , fHitDuration, HitHandler)));
+        StateEvents.Add((0.75f , CastSkill));
     }
 
     public override void Enter()
@@ -46,7 +36,6 @@ public class ElfMouseSkillState : EntityState
     public override void Exit()
     {
         _aniController._animator.applyRootMotion = false;
-        _effector.StopEffect((int)ELF.ElfEffect.MOUSE_SKILL);
         _upperStateMachine.TransitionTo((ushort)ENTITY.UpperStateType.IDLE);    // 상체 복귀
     }
 
@@ -60,10 +49,9 @@ public class ElfMouseSkillState : EntityState
         _move.Dash(fDashSpeed , fDashDistance);
     }
 
-    void HitHandler(IHitter.HitInfo hitInfo)
+    void CastSkill()
     {
-        hitInfo.Target.Hit(new IDamagable.DamageInfo{
-            Damage = _stat.Get_Stat(Stat.STAT_TAG.DAMAGE), Attacker = _stat.transform, Point = hitInfo.Point});
+        _player._skillCaster.TryCast(
+            NetworkObjectType.ELF_MOUSE_SKILL, _player.transform.position, _player.transform.forward);
     }
-
 }

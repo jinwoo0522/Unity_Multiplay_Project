@@ -7,8 +7,6 @@ using UnityEngine;
 public class AirborneOnCollision : ICollisionEventModule
 {
     [SerializeField] private CollisionTiming _timing = CollisionTiming.ENTER; // 에어본 판정 시점(진입/겹침)
-    [SerializeField] private float _fAirbornePower;   // 에어본 초기 세기
-    [SerializeField] private float _fAirborneDecay;   // 에어본 감쇠율
 
     private Skill _skill;
 
@@ -23,6 +21,6 @@ public class AirborneOnCollision : ICollisionEventModule
         if (col.TryGetComponent(out CrowdController crowdController) == false) return;
 
         crowdController.Apply(CrowdController.CC_TAG.AIRBORNE,
-            new ICrowdControl.CCData(_fAirbornePower, _fAirborneDecay));
+            new ICrowdControl.CCData(_skill.Data.fAirbornePower, _skill.Data.fAirborneDecay));
     }
 }

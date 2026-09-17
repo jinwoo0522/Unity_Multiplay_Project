@@ -44,7 +44,7 @@ public class MagicianUpperQSkillState : EntityState
     {
         Vector3 vPos = _player.transform.position + new Vector3(0f , 0.5f ,0f);
         
-        GameManager.Instance.skillFactory.Create(
-            NetworkObjectType.ICE_EXPLOSION, vPos, Vector2.zero, _player.OwnerClientId, _player.gameObject);
+        _player._skillCaster.TryCast(
+            NetworkObjectType.ICE_EXPLOSION, vPos, Vector2.zero);
     }
 }

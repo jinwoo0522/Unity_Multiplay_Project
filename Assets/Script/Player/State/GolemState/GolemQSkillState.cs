@@ -25,8 +25,8 @@ public class GolemQSkillState : EntityState
     {
         _aniController._state.Value = (ushort)GOLEM.StateType.Q_SKILL;
         // 서버 권위 — 시전자 위치에 FireBuff 스폰
-        GameManager.Instance.skillFactory.Create(
-            NetworkObjectType.FIRE_BUFF, _bodyTransform.position , Vector2.zero, _player.OwnerClientId, _player.gameObject);
+        _player._skillCaster.TryCast(
+            NetworkObjectType.FIRE_BUFF, _bodyTransform.position , Vector2.zero);
         _player._upperStateMachine.TransitionTo((ushort)ENTITY.UpperStateType.EMPTY);   // 상체 잠금
     }
 

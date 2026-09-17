@@ -5,6 +5,7 @@ public enum NetworkObjectType
     ICE_EXPLOSION,
     STORM,
     FIRE_EXPLOSION,
-    FIRE_BUFF
+    FIRE_BUFF,
+    ELF_MOUSE_SKILL
 }
 

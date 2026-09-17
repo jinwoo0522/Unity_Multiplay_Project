@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 520227669
+  GlobalObjectIdHash: 923568069
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Skill
   ShowTopMostFoldoutHeaderGroup: 1
+  _data: {fileID: 11400000, guid: 7824e62328a64f3aaf5818b1c3f1d5e1, type: 2}
   _effector: {fileID: 6887755163937273642}
   _skillModules:
   - rid: 8331586036160790618
@@ -128,30 +129,26 @@ MonoBehaviour:
     RefIds:
     - rid: 8331586036160790618
       type: {class: ReturnToPoolOnTime, ns: , asm: Assembly-CSharp}
-      data:
-        _fLifetime: 3
+      data: 
     - rid: 8331586036160790619
       type: {class: SkillSphereCast, ns: , asm: Assembly-CSharp}
       data:
         _fDelay: 0
         _vOffset: {x: 0, y: 0, z: 0}
-        _fRadius: 4
         _targetMask:
           serializedVersion: 2
           m_Bits: 640
         _onHit:
         - rid: 8331586036160790625
         - rid: 8331586036160790620
-    - rid: 8331586036160790625
-      type: {class: DamageOnCollision, ns: , asm: Assembly-CSharp}
-      data:
-        _timing: 0
-        _fBaseDamage: 15
     - rid: 8331586036160790620
       type: {class: FreezeOnCollision, ns: , asm: Assembly-CSharp}
       data:
         _timing: 0
-        _fFreezeTime: 2
+    - rid: 8331586036160790625
+      type: {class: DamageOnCollision, ns: , asm: Assembly-CSharp}
+      data:
+        _timing: 0
 --- !u!114 &6887755163937273642
 MonoBehaviour:
   m_ObjectHideFlags: 0

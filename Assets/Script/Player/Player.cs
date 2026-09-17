@@ -17,6 +17,7 @@ public abstract class Player : Entity
     public EntityAnimator       _upperAniController {get; protected set;}
     public IJumpMovement        _jump {get; protected set;}
     public IEntityRotate        _rotate {get; protected set;}   // 회전 소스가 엔티티마다 달라 생성은 파생 클래스가 담당
+    public SkillCaster          _skillCaster {get; protected set;}
     public override ENTITY.Faction Faction => ENTITY.Faction.PLAYER;
 
     public override void OnNetworkSpawn()
@@ -24,6 +25,8 @@ public abstract class Player : Entity
         base.OnNetworkSpawn();
        //인풋 컴포넌트
        _input = GetComponent<Player_Input>();
+       //스킬 생성·마나·쿨타임 관리 컴포넌트
+       _skillCaster = GetComponent<SkillCaster>();
        // 점프 컴포넌트
        _jump = GetComponent<IJumpMovement>();
        // 회전 객체 생성 — 플레이어는 조준 입력을 회전 소스로 쓴다

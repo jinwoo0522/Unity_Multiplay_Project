@@ -6,12 +6,14 @@ public class StateToQSkill_Golem : ITransition
 
     IEntityInputState _inputState;
     private StateMachine _upperStateMachine;
+    private SkillCaster _skillCaster;
 
 
-    public StateToQSkill_Golem(IEntityInputState input, StateMachine upperStateMachine)
+    public StateToQSkill_Golem(Golem_Player player)
     {
-        _inputState = input;
-        _upperStateMachine = upperStateMachine;
+        _inputState = player._input;
+        _upperStateMachine = player._upperStateMachine;
+        _skillCaster = player._skillCaster;
     }
     public bool CheckRule(float fTimeDelta)
     {
@@ -19,10 +21,10 @@ public class StateToQSkill_Golem : ITransition
         if(_upperStateMachine.CurrentState != (ushort)ENTITY.UpperStateType.IDLE)
             return false;
 
-        if((_inputState.inputState & (ushort)ENTITY.InputFlagType.Q) != 0)
-            return true;
+        if((_inputState.inputState & (ushort)ENTITY.InputFlagType.Q) == 0)
+            return false;
 
-        return false;
+        return _skillCaster.CanCast(NetworkObjectType.FIRE_BUFF);
     }
 
     public void OnTransition()

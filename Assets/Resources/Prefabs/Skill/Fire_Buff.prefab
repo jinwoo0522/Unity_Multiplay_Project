@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Skill
   ShowTopMostFoldoutHeaderGroup: 1
+  _data: {fileID: 11400000, guid: 365b5a33ebf6480cb2a9988e8f41c18e, type: 2}
   _effector: {fileID: 6887755163937273642}
   _skillModules:
   - rid: 6238406325766979877
@@ -131,7 +132,6 @@ MonoBehaviour:
       data:
         _fDelay: 0.7
         _vOffset: {x: 0, y: 0, z: 0}
-        _fRadius: 3
         _targetMask:
           serializedVersion: 2
           m_Bits: 640
@@ -143,7 +143,6 @@ MonoBehaviour:
       type: {class: DamageOnCollision, ns: , asm: Assembly-CSharp}
       data:
         _timing: 0
-        _fBaseDamage: 10
     - rid: 6238406325766979879
       type: {class: ReturnToPoolOnCollision, ns: , asm: Assembly-CSharp}
       data:
@@ -152,12 +151,9 @@ MonoBehaviour:
       type: {class: KnockbackOnCollision, ns: , asm: Assembly-CSharp}
       data:
         _timing: 0
-        _fKnockbackPower: 50
-        _fKnockbackDecay: 5
     - rid: 6238406349884751963
       type: {class: ReturnToPoolOnTime, ns: , asm: Assembly-CSharp}
-      data:
-        _fLifetime: 2
+      data: 
 --- !u!114 &6887755163937273642
 MonoBehaviour:
   m_ObjectHideFlags: 0

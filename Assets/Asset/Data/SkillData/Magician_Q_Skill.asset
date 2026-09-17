@@ -12,19 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6421ef99e0d356d4b997246a50f612c8, type: 3}
   m_Name: Magician_Q_Skill
   m_EditorClassIdentifier: 
-  strName: "\uB9C8\uBC95\uC0AC Q \uC2A4\uD0AC"
-  fSpeed: 10
-  fAcceleration: 5
-  fLifeTime: 3
-  fDamage: 20
-  fRadius: 5
-  nPoolSize: 5
-  prefab: {fileID: 951630376874915276, guid: 1a0953df719ae48419faf46f9ad66289, type: 3}
-  _fCooldown: 10
-  _strSkillState: Standing 2H Magic Area Attack 02
-  _fKnockback: 0
-  _fLaunchForce: 0
-  _fSlowMultiplier: 1
-  _fSlowDuration: 0
-  _fFreezeDuration: 3
-  _fManaCost: 30
+  fSpeed: 0
+  fLifetime: 3
+  fDamage: 15
+  fRadius: 4
+  fKnockbackPower: 0
+  fKnockbackDecay: 0
+  fAirbornePower: 0
+  fAirborneDecay: 0
+  fFreezeTime: 2
+  fManaCost: 30
+  fCooldown: 10

@@ -6,8 +6,6 @@ using UnityEngine;
 [System.Serializable]
 public class ReturnToPoolOnTime : ISkillModule
 {
-    [SerializeField] private float _fLifetime = 3f;   // 반납까지 수명(초)
-
     private Skill _skill;
     private float _fTimer;   // 반납까지 남은 시간
 
@@ -19,7 +17,7 @@ public class ReturnToPoolOnTime : ISkillModule
     // 발동 — 수명 타이머 초기화
     public void Enter()
     {
-        _fTimer = _fLifetime;
+        _fTimer = _skill.Data.fLifetime;
     }
 
     // 서버 권위 — 수명 소진 시 디스폰하여 풀로 반납

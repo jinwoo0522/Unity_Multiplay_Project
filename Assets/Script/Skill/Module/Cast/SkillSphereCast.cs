@@ -12,7 +12,6 @@ public class SkillSphereCast : ISkillModule
 {
     [SerializeField] private float     _fDelay;         // 발동 후 캐스트 시작까지 지연(초, 윈드업)
     [SerializeField] private Vector3   _vOffset;        // 캐스트 중심 오프셋 — 스킬 회전을 따라감(로컬)
-    [SerializeField] private float     _fRadius = 1f;   // 구 반경
     [SerializeField] private LayerMask _targetMask;     // 판정 대상 레이어
     // 캐스트로 걸린 대상에 실행할 충돌 이벤트 모듈 조합 (데미지/넉백 등)
     [SerializeReference, SubclassSelector] private List<ICollisionEventModule> _onHit = new List<ICollisionEventModule>();
@@ -57,7 +56,7 @@ public class SkillSphereCast : ISkillModule
     private void Cast()
     {
         Vector3 vCenter = _skill.transform.position + _skill.transform.rotation * _vOffset;
-        int iCount = Physics.OverlapSphereNonAlloc(vCenter, _fRadius, _hitBuffer, _targetMask);
+        int iCount = Physics.OverlapSphereNonAlloc(vCenter, _skill.Data.fRadius, _hitBuffer, _targetMask);
         _currentHits.Clear();
 
         for (int i = 0; i < iCount; ++i)

@@ -12,19 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6421ef99e0d356d4b997246a50f612c8, type: 3}
   m_Name: Golem_Mouse_Skill
   m_EditorClassIdentifier: 
-  strName: "\uACE8\uB818 \uB9C8\uC6B0\uC2A4 \uC2A4\uD0AC"
-  fSpeed: 10
-  fAcceleration: 5
-  fLifeTime: 3
+  fSpeed: 0
+  fLifetime: 3
   fDamage: 20
   fRadius: 5
-  nPoolSize: 5
-  prefab: {fileID: 4690530322022716621, guid: d87ba73ae71ec4249ba1a88555353f67, type: 3}
-  _fCooldown: 5
-  _strSkillState: Standing Melee Run Jump Attack
-  _fKnockback: 0
-  _fLaunchForce: 8
-  _fSlowMultiplier: 0.5
-  _fSlowDuration: 2
-  _fFreezeDuration: 0
-  _fManaCost: 20
+  fKnockbackPower: 0
+  fKnockbackDecay: 0
+  fAirbornePower: 25
+  fAirborneDecay: 3
+  fFreezeTime: 0
+  fManaCost: 20

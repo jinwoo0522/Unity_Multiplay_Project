@@ -22,6 +22,7 @@ public class Stat : NetworkBehaviour
 
     [SerializeField] private Entity_Data Stat_Data;
     private NetworkList<float> StatList = new();
+    private ManaRegenerator _manaRegenerator;
 
     // 스탯 변경 통지 — UI·피격 처리 등 외부가 구독 (Stat은 구독자를 모름, 단방향)
     public event Action<STAT_TAG> StatChanged;
@@ -43,6 +44,15 @@ public class Stat : NetworkBehaviour
         StatList[(int)STAT_TAG.DAMAGE] = Stat_Data.fAttackDamage;
         StatList[(int)STAT_TAG.WALK_SPEED] = Stat_Data.fWalkSpeed;
         StatList[(int)STAT_TAG.RUN_SPEED] = Stat_Data.fRunSpeed;
+
+        _manaRegenerator = new ManaRegenerator(this, Stat_Data.fManaRegen);
+    }
+
+    private void Update()
+    {
+        if(IsServer == false) return;
+
+        _manaRegenerator?.Update(Time.deltaTime);
     }
 
     public override void OnNetworkDespawn()

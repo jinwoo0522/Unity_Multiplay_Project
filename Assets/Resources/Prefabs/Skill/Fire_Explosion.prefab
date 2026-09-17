@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1268019032
+  GlobalObjectIdHash: 455375247
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Skill
   ShowTopMostFoldoutHeaderGroup: 1
+  _data: {fileID: 11400000, guid: 7d181ed0011d4ce68d65d4be397509fe, type: 2}
   _effector: {fileID: 6887755163937273642}
   _skillModules:
   - rid: 6238406325766979877
@@ -130,7 +131,6 @@ MonoBehaviour:
       data:
         _fDelay: 0
         _vOffset: {x: 0, y: 0, z: 0}
-        _fRadius: 5
         _targetMask:
           serializedVersion: 2
           m_Bits: 640
@@ -142,7 +142,6 @@ MonoBehaviour:
       type: {class: DamageOnCollision, ns: , asm: Assembly-CSharp}
       data:
         _timing: 0
-        _fBaseDamage: 20
     - rid: 6238406325766979879
       type: {class: ReturnToPoolOnCollision, ns: , asm: Assembly-CSharp}
       data:
@@ -151,8 +150,6 @@ MonoBehaviour:
       type: {class: AirborneOnCollision, ns: , asm: Assembly-CSharp}
       data:
         _timing: 0
-        _fAirbornePower: 25
-        _fAirborneDecay: 3
 --- !u!114 &6887755163937273642
 MonoBehaviour:
   m_ObjectHideFlags: 0

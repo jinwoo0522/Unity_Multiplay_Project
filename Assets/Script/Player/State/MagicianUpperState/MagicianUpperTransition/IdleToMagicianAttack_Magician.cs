@@ -6,10 +6,12 @@ public class IdleToMagicianAttack_Magician : ITransition
     public ushort NextState => (ushort)MAGICIAN.UpperStateType.ATTACK;
 
     IEntityInputState _inputState;
+    SkillCaster _skillCaster;
 
-    public IdleToMagicianAttack_Magician(IEntityInputState input)
+    public IdleToMagicianAttack_Magician(Magician_Player player)
     {
-        _inputState = input;
+        _inputState = player._input;
+        _skillCaster = player._skillCaster;
     }
 
     public bool CheckRule(float fTimeDelta)
@@ -17,7 +19,7 @@ public class IdleToMagicianAttack_Magician : ITransition
         if((_inputState.inputState & (ushort)ENTITY.InputFlagType.MOUSE_LEFT) == 0)
             return false;
 
-        return true;
+        return _skillCaster.CanCast(NetworkObjectType.ELECTRONIC_SKILL);
     }
 
     public void OnTransition() { }

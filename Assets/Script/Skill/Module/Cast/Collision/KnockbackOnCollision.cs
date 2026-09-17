@@ -7,8 +7,6 @@ using UnityEngine;
 public class KnockbackOnCollision : ICollisionEventModule
 {
     [SerializeField] private CollisionTiming _timing = CollisionTiming.ENTER; // 넉백 판정 시점(진입/겹침)
-    [SerializeField] private float _fKnockbackPower;   // 넉백 초기 세기
-    [SerializeField] private float _fKnockbackDecay;   // 넉백 감쇠율
 
     private Skill _skill;
 
@@ -25,6 +23,6 @@ public class KnockbackOnCollision : ICollisionEventModule
         Vector3 vKnockbackDir = Vector3.Normalize(col.transform.position - _skill.transform.position);
 
         crowdController.Apply(CrowdController.CC_TAG.KNOCKBACK,
-            new ICrowdControl.CCData(_fKnockbackPower, _fKnockbackDecay, vKnockbackDir));
+            new ICrowdControl.CCData(_skill.Data.fKnockbackPower, _skill.Data.fKnockbackDecay, vKnockbackDir));
     }
 }

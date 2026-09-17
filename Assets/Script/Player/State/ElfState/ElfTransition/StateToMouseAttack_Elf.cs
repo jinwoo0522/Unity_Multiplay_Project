@@ -6,12 +6,14 @@ public class StateToMouseAttack_Elf : ITransition
 
     IEntityInputState _inputState;
     private StateMachine _upperStateMachine;
+    private SkillCaster _skillCaster;
 
 
-    public StateToMouseAttack_Elf(IEntityInputState input, StateMachine upperStateMachine)
+    public StateToMouseAttack_Elf(Elf_Player player)
     {
-        _inputState = input;
-        _upperStateMachine = upperStateMachine;
+        _inputState = player._input;
+        _upperStateMachine = player._upperStateMachine;
+        _skillCaster = player._skillCaster;
     }
     public bool CheckRule(float fTimeDelta)
     {
@@ -22,7 +24,7 @@ public class StateToMouseAttack_Elf : ITransition
         if((_inputState.inputState & (ushort)ENTITY.InputFlagType.MOUSE_RIGHT) == 0)
             return false;
 
-        return true;
+        return _skillCaster.CanCast(NetworkObjectType.ELF_MOUSE_SKILL);
     }
 
     public void OnTransition()
