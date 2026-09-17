@@ -1,9 +1,9 @@
 using UnityEngine;
 
 [System.Serializable]
-public class DamageOnCollision : ICollsionEventModule
+public class DamageOnCollision : ICollisionEventModule
 {
-    [SerializeField] private CollisionTiming _timing = CollisionTiming.ENTER; // 물리 트리거 구독 시점(캐스트 구동 시 무시)
+    [SerializeField] private CollisionTiming _timing = CollisionTiming.ENTER; // 캐스트 반응 시점
     [SerializeField] private float _fBaseDamage;   // 기본 데미지 — Owner 공격력에 가산
 
     private Skill _skill;
@@ -14,7 +14,7 @@ public class DamageOnCollision : ICollsionEventModule
     public void Bind(Skill skill) => _skill = skill;
 
     // 충돌 대상에 데미지 (서버 전용)
-    public void Collsion(Collider col)
+    public void Collision(Collider col)
     {
         if (_skill.IsServer == false) return;                             // 데미지는 서버 권위
         if (col.TryGetComponent(out IDamagable target) == false) return;

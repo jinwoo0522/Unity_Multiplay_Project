@@ -12,10 +12,7 @@ GameObject:
   - component: {fileID: 5852248775966274303}
   - component: {fileID: 7728121224989715948}
   - component: {fileID: 5433324361279344289}
-  - component: {fileID: 2029163365358526597}
   - component: {fileID: 1595309184926846098}
-  - component: {fileID: 2875927014575444241}
-  - component: {fileID: 7914889206072944326}
   m_Layer: 0
   m_Name: ElectricSkill
   m_TagString: Skill
@@ -123,10 +120,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Skill
   ShowTopMostFoldoutHeaderGroup: 1
   _effector: {fileID: 1595309184926846098}
-  _hitter: {fileID: 2029163365358526597}
   _skillModules:
   - rid: 6238406167958388737
-  - rid: 6238406280567586902
+  - rid: 8331586036160790621
   references:
     version: 2
     RefIds:
@@ -142,35 +138,29 @@ MonoBehaviour:
         _vCustomDir: {x: 0, y: 0, z: 0}
         _fDelay: 0
         _fSpeed: 26
-    - rid: 6238406280567586902
-      type: {class: SkillDamagable, ns: , asm: Assembly-CSharp}
+    - rid: 8331586036160790621
+      type: {class: SkillSphereCast, ns: , asm: Assembly-CSharp}
       data:
-        _mode: 0
+        _fDelay: 0
+        _vOffset: {x: 0, y: 0, z: 0}
+        _fRadius: 1
+        _targetMask:
+          serializedVersion: 2
+          m_Bits: 960
+        _onHit:
+        - rid: 8331586036160790622
+        - rid: 8331586036160790623
+        - rid: 8331586036160790624
+    - rid: 8331586036160790622
+      type: {class: DamageOnCollision, ns: , asm: Assembly-CSharp}
+      data:
+        _timing: 0
         _fBaseDamage: 15
-        _fDamageInterval: 0
---- !u!114 &2029163365358526597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4427000628938413266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2575972d2311be84484834b528973aa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillHitCast
-  ShowTopMostFoldoutHeaderGroup: 1
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 960
-  _fHitDelayTime: 0
-  _collisions:
-  - rid: 6238406212872306776
-  references:
-    version: 2
-    RefIds:
-    - rid: 6238406212872306776
+    - rid: 8331586036160790623
+      type: {class: EffectOnCollision, ns: , asm: Assembly-CSharp}
+      data:
+        _timing: 0
+    - rid: 8331586036160790624
       type: {class: ReturnToPoolOnCollision, ns: , asm: Assembly-CSharp}
       data:
         _timing: 0
@@ -196,51 +186,3 @@ MonoBehaviour:
     _startTiming: 1
     _endTiming: 0
     _bFollow: 0
---- !u!54 &2875927014575444241
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4427000628938413266}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!135 &7914889206072944326
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4427000628938413266}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

@@ -6,7 +6,6 @@ public class SkillMovement : ISkillModule
 {
     // 인스펙터에서 SubclassSelector로 이동 모듈을 부착 — 여러 이동 방식 조합 가능
     [SerializeReference, SubclassSelector] private List<IMovementModule> _movements = new List<IMovementModule>();
-    [SerializeField] private bool _stopOnHit;   // 대상 진입 시 이동을 스스로 멈출지 — 관통 투사체는 false
 
     public bool Move {get; set;}
 
@@ -34,10 +33,4 @@ public class SkillMovement : ISkillModule
             _movements[i].Move(fTimeDelta);
     }
 
-    // 대상 진입 시 — 옵션이 켜져 있으면 스스로 정지 (다른 모듈을 참조하지 않음)
-    public void CollisionEnter(Collider collider)
-    {
-        if (_stopOnHit)
-            Move = false;
-    }
 }
