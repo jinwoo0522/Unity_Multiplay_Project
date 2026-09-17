@@ -1,10 +1,10 @@
 using Unity.Netcode;
 using UnityEngine;
 
-// 충돌 시 스킬(NetworkObject)을 디스폰해 풀로 반납하는 충돌 모듈.
+// 캐스트 적중 시 스킬(NetworkObject)을 디스폰해 풀로 반납하는 반응 모듈.
 // 서버 권위적 — 디스폰은 서버에서만 수행하고, NetworkPoolHandler.Destroy를 통해 풀로 돌아간다.
 [System.Serializable]
-public class ReturnToPoolOnCollision : ICollsionEventModule
+public class ReturnToPoolOnCollision : ICollisionEventModule
 {
     [SerializeField] private CollisionTiming _timing = CollisionTiming.ENTER; // 반납 판정 시점(진입/겹침)
 
@@ -19,7 +19,7 @@ public class ReturnToPoolOnCollision : ICollsionEventModule
     }
 
     // 충돌 발생 — 서버에서만 디스폰하여 풀로 반납
-    public void Collsion(Collider col)
+    public void Collision(Collider col)
     {
         if (_skill.IsServer == false) return; // 디스폰은 서버 권위
 

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-// 충돌한 대상에게 넉백 CC를 적용하는 충돌 이벤트 모듈.
+// 캐스트로 감지한 대상에게 넉백 CC를 적용하는 반응 모듈.
 // 넉백 방향 = 대상 위치 - 스킬 위치(충돌 지점에서 밀어냄).
 // 서버 권위 — CC 판정/적용은 서버에서만 수행한다.
 [System.Serializable]
-public class KnockbackOnCollision : ICollsionEventModule
+public class KnockbackOnCollision : ICollisionEventModule
 {
     [SerializeField] private CollisionTiming _timing = CollisionTiming.ENTER; // 넉백 판정 시점(진입/겹침)
     [SerializeField] private float _fKnockbackPower;   // 넉백 초기 세기
@@ -18,7 +18,7 @@ public class KnockbackOnCollision : ICollsionEventModule
     public void Bind(Skill skill) => _skill = skill;
 
     // 충돌 대상에 넉백 적용 (서버 전용)
-    public void Collsion(Collider col)
+    public void Collision(Collider col)
     { 
         if (col.TryGetComponent(out CrowdController crowdController) == false) return;
 

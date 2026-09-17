@@ -50,6 +50,20 @@ public class SkillEffector : NetworkBehaviour, ISkillModule
         _activeEffects.Clear();
     }
 
+    public void PlayCollisionEffect()
+    {
+        if (IsServer == false) return;
+
+        for (int i = 0; i < _effects.Count; ++i)
+        {
+            if (_effects[i].StartTiming == EffectStartTiming.COLLISION)
+                Play_ClientRpc(i, transform.position, transform.rotation);
+
+            if (_effects[i].EndTiming == EffectEndTiming.COLLISION)
+                Stop_ClientRpc(i);
+        }
+    }
+
     [ClientRpc]
     private void Play_ClientRpc(int iIndex, Vector3 position, Quaternion rotation)
     {
@@ -77,17 +91,4 @@ public class SkillEffector : NetworkBehaviour, ISkillModule
         }
     }
 
-    public void CollisionEnter(Collider collider)
-    {
-        if (!IsServer) return; // RPC는 서버에서만
-
-        for (int i = 0; i < _effects.Count; ++i)
-        {
-            if (_effects[i].StartTiming == EffectStartTiming.COLLISION)
-                Play_ClientRpc(i, transform.position, transform.rotation);
-
-            if (_effects[i].EndTiming == EffectEndTiming.COLLISION)
-                Stop_ClientRpc(i);
-        }
-    }
 }
