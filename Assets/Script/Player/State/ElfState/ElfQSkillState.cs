@@ -9,6 +9,7 @@ public class ElfQSkillState : EntityState
     IEntityRotate _rotate;
     IEntityInputState _input;
     private StateMachine _upperStateMachine;
+    private bool _isManaDepleted;
     public ElfQSkillState(Elf_Player player)
     {
         _player = player;
@@ -21,11 +22,12 @@ public class ElfQSkillState : EntityState
     public override void Create()
     {
         TransitionList.Add(new QSkillToIdle_Elf(_input));
-        TransitionList.Add(new QSkillManaToIdle_Elf(_player._skillCaster));
+        TransitionList.Add(new QSkillManaToIdle_Elf(() => _isManaDepleted));
     }
 
     public override void Enter()
     {
+        _isManaDepleted = false;
         _aniController._state.Value = (ushort)ELF.StateType.Q_SKILL;
         _skill = _player._skillCaster.TryCast(
             NetworkObjectType.ELF_Q_SKILL, _player.transform.position, _player.transform.forward);
@@ -42,7 +44,8 @@ public class ElfQSkillState : EntityState
 
     protected override void UpdateState(float fTimedelta, ushort curState)
     {
-        _player._skillCaster.ConsumeManaPerSecond(_skill.Data.fManaCostPerSecond, fTimedelta);
+        _isManaDepleted = _player._skillCaster.ConsumeManaPerSecond(
+            _skill.Data.fManaCostPerSecond, fTimedelta);
         _move.Gravity();
         _rotate.Rotate();
     }

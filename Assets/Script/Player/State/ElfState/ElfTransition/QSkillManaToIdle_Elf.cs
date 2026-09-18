@@ -1,19 +1,19 @@
-using UnityEngine;
+using System;
 
 public class QSkillManaToIdle_Elf : ITransition
 {
     public ushort NextState => (ushort)ENTITY.StateType.IDLE;
 
-    private SkillCaster _skillCaster;
+    private Func<bool> _isManaDepleted;
 
-    public QSkillManaToIdle_Elf(SkillCaster skillCaster)
+    public QSkillManaToIdle_Elf(Func<bool> isManaDepleted)
     {
-        _skillCaster = skillCaster;
+        _isManaDepleted = isManaDepleted;
     }
 
     public bool CheckRule(float fTimeDelta)
     {
-        return _skillCaster.HasMana() == false;
+        return _isManaDepleted();
     }
 
     public void OnTransition()

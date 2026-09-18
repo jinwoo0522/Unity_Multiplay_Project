@@ -42,13 +42,15 @@ public class SkillCaster : NetworkBehaviour
         return _stat.Get_Stat(Stat.STAT_TAG.MP) > 0f;
     }
 
-    public void ConsumeManaPerSecond(float fManaCostPerSecond, float fTimeDelta)
+    public bool ConsumeManaPerSecond(float fManaCostPerSecond, float fTimeDelta)
     {
-        if (IsServer == false) return;
+        if (IsServer == false) return false;
 
         float fCurrentMana = _stat.Get_Stat(Stat.STAT_TAG.MP);
         float fManaCost = fManaCostPerSecond * fTimeDelta;
         _stat.Set_Stat(Stat.STAT_TAG.MP, Mathf.Max(fCurrentMana - fManaCost, 0f));
+
+        return fCurrentMana <= fManaCost;
     }
 
     public Skill TryCast(NetworkObjectType type, Vector3 position, Vector3 direction)
@@ -61,7 +63,8 @@ public class SkillCaster : NetworkBehaviour
             type, position, direction, OwnerClientId, gameObject);
 
         _stat.Add_Stat(Stat.STAT_TAG.MP, -data.fManaCost);
-        _readyTimes[type] = NetworkManager.ServerTime.Time + data.fCooldown;
+        if (data.CooldownTiming == CooldownTiming.ON_CAST)
+            StartCooldown(type);
 
         return skill;
     }
@@ -72,4 +75,13 @@ public class SkillCaster : NetworkBehaviour
 
         return Mathf.Max(0f, (float)(readyTime - NetworkManager.ServerTime.Time));
     }
+
+    public void StartCooldown(NetworkObjectType type)
+    {
+        if (IsServer == false) return;
+        if (_skillData.TryGetValue(type, out SkillData data) == false) return;
+
+        _readyTimes[type] = NetworkManager.ServerTime.Time + data.fCooldown;
+    }
+
 }
