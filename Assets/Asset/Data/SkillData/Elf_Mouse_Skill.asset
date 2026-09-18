@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   fSpeed: 0
   fLifetime: 0.2
-  fDamage: 0
+  fDamage: 15
   fRadius: 0
   fKnockbackPower: 0
   fKnockbackDecay: 0
   fAirbornePower: 0
   fAirborneDecay: 0
   fFreezeTime: 0
-  fManaCost: 0
-  fCooldown: 0
+  fManaCost: 15
+  fManaCostPerSecond: 0
+  fHealAmountPerSecond: 0
+  fCooldown: 5
+  _cooldownTiming: 0

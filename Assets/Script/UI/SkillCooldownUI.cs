@@ -6,59 +6,44 @@ using UnityEngine.UI;
 // 슬롯 0=Q(Buff), 슬롯 1=우클릭(Attack_Skill).
 public class SkillCooldownUI : MonoBehaviour
 {
-    // Inspector에서 QSlot/Overlay, MouseSlot/Overlay를 각각 연결
     [SerializeField] private Image[] _overlays;
 
-    // 슬롯별 쿨타임 총 길이(초)
-    private readonly float[] _lengths  = new float[2];
-    // 슬롯별 경과 시간 (-1 = 비활성)
-    private readonly float[] _elapsed  = { -1f, -1f };
+    private readonly float[] _remainingTimes = { -1f, -1f };
+    private readonly float[] _totalTimes = new float[2];
 
-    // Player_Skill.OnNetworkSpawn에서 캐릭터별 fCooldown 값으로 등록
-    public void SetCooldownLength(int slot, float seconds)
+    public void SetCooldown(int iSlot, float fRemainingTime, float fTotalTime)
     {
-        if (!IsValidSlot(slot)) return;
-        _lengths[slot] = seconds;
-    }
+        if (IsValidSlot(iSlot) == false) return;
 
-    // 서버가 스킬 발동을 확정한 순간 owner에게 호출됨
-    public void StartCooldown(int slot)
-    {
-        if (!IsValidSlot(slot)) return;
-        _elapsed[slot] = 0f;
+        _totalTimes[iSlot] = fTotalTime;
+        _remainingTimes[iSlot] = fRemainingTime;
 
-        // 오버레이 활성화 및 전체 덮음
-        _overlays[slot].enabled    = true;
-        _overlays[slot].fillAmount = 1f;
+        RefreshOverlay(iSlot);
     }
 
     private void Update()
     {
-        CheckCooltime();
-    }
-
-    private bool IsValidSlot(int slot) => slot >= 0 && slot < 2;
-    private void CheckCooltime()
-    {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < _remainingTimes.Length; ++i)
         {
-            if (_elapsed[i] < 0f) continue;
+            if (_remainingTimes[i] <= 0f) continue;
 
-            _elapsed[i] += Time.deltaTime;
-
-            float ratio = _elapsed[i] / _lengths[i];
-            if (ratio >= 1f)
-            {
-                // 쿨타임 완료 — 오버레이 비활성
-                _elapsed[i]            = -1f;
-                _overlays[i].enabled   = false;
-                _overlays[i].fillAmount = 0f;
-            }
-            else
-            {
-                // fillOrigin=Bottom이므로 fillAmount 감소 시 위에서부터 걷힘
-                _overlays[i].fillAmount = 1f - ratio;
-            }
+            _remainingTimes[i] = Mathf.Max(0f, _remainingTimes[i] - Time.unscaledDeltaTime);
+            RefreshOverlay(i);
         }
     }
+
+    private bool IsValidSlot(int iSlot)
+    {
+        return iSlot >= 0 && iSlot < _overlays.Length;
+    }
+
+    private void RefreshOverlay(int iSlot)
+    {
+        bool isCoolingDown = _remainingTimes[iSlot] > 0f && _totalTimes[iSlot] > 0f;
+        _overlays[iSlot].gameObject.SetActive(isCoolingDown);
+        _overlays[iSlot].fillAmount = isCoolingDown
+            ? _remainingTimes[iSlot] / _totalTimes[iSlot]
+            : 0f;
+    }
+
 }
