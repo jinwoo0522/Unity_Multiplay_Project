@@ -22,7 +22,9 @@ public class SkillData : ScriptableObject
     public float fManaCostPerSecond;
     public float fHealAmountPerSecond;
     public float fCooldown;
+    [SerializeField] private Sprite _icon;
     [SerializeField] private CooldownTiming _cooldownTiming;
 
+    public Sprite Icon => _icon;
     public CooldownTiming CooldownTiming => _cooldownTiming;
 }

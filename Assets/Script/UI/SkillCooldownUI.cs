@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SkillCooldownUI : MonoBehaviour
 {
     [SerializeField] private Image[] _overlays;
+    [SerializeField] private Image[] _icons;
 
     private readonly float[] _remainingTimes = { -1f, -1f };
     private readonly float[] _totalTimes = new float[2];
@@ -19,6 +20,13 @@ public class SkillCooldownUI : MonoBehaviour
         _remainingTimes[iSlot] = fRemainingTime;
 
         RefreshOverlay(iSlot);
+    }
+
+    public void SetIcon(int iSlot, Sprite icon)
+    {
+        if (IsValidSlot(iSlot) == false || iSlot >= _icons.Length) return;
+
+        _icons[iSlot].sprite = icon;
     }
 
     private void Update()

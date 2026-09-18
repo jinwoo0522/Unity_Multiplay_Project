@@ -22,4 +22,8 @@ MonoBehaviour:
   fAirborneDecay: 0
   fFreezeTime: 0
   fManaCost: 30
+  fManaCostPerSecond: 0
+  fHealAmountPerSecond: 0
   fCooldown: 15
+  _icon: {fileID: 21300000, guid: d7b166945aca1d641b9a2f0a400ab2e6, type: 3}
+  _cooldownTiming: 0
