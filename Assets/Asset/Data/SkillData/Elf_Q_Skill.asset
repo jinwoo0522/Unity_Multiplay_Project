@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6421ef99e0d356d4b997246a50f612c8, type: 3}
-  m_Name: Elf_Mouse_Skill
+  m_Name: Elf_Q_Skill
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   fSpeed: 0
   fLifetime: 0.2
-  fDamage: 15
+  fDamage: 0
   fRadius: 0
   fKnockbackPower: 0
   fKnockbackDecay: 0
   fAirbornePower: 0
   fAirborneDecay: 0
   fFreezeTime: 0
-  fManaCost: 15
-  fManaCostPerSecond: 0
-  fHealAmountPerSecond: 0
-  fCooldown: 5
-  _cooldownTiming: 0
+  fManaCost: 0
+  fManaCostPerSecond: 15
+  fHealAmountPerSecond: 15
+  fCooldown: 3
+  _cooldownTiming: 1

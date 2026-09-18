@@ -56,6 +56,14 @@ public class PoolResourceLoader
             return;
         }
         prefabs.Add(elfMouseSkill);
+
+        GameObject elfQSkill = Resources.Load<GameObject>("Prefabs/Skill/Elf_Q_Skill");
+        if (elfQSkill == null)
+        {
+            GameManager.Instance.DebugMessage<PoolResourceLoader>("Elf_Q_Skill 스킬 NULL");
+            return;
+        }
+        prefabs.Add(elfQSkill);
     }
 
     // 로컬(이펙트) 프리팹 로드 — enum 순서와 로드 순서를 일치시킨다
@@ -146,5 +154,13 @@ public class PoolResourceLoader
             return;
         }
         prefabs.Add(elfMouseSkill);
+
+        GameObject elfQSkill = Resources.Load<GameObject>("Prefabs/Effect/Elf/Elf_Q_Skill_Effect");
+        if (elfQSkill == null)
+        {
+            GameManager.Instance.DebugMessage<PoolResourceLoader>("Elf_Q_Skill_Effect 이펙트 NULL");
+            return;
+        }
+        prefabs.Add(elfQSkill);
     }
 }

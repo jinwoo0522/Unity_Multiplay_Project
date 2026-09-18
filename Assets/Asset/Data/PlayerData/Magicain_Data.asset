@@ -15,16 +15,12 @@ MonoBehaviour:
   strName: "\uB9E4\uC9C0\uC158"
   strDesc: "\uB9E4\uC9C0\uC158 \uC785\uB2C8\uB2E4"
   fAttackDamage: 5
-  fHp: 1
   fMaxHp: 100
-  fArmor: 5
-  fResistance: 5
-  fMaxResistance: 15
   fWalkSpeed: 2
   fRunSpeed: 4
-  fAnimSpeed: 3
-  fJumpAmount: 5
+  fRotateSpeed: 10
   fGravity: -9.8
-  fJumpDelay: 0.1
   fMaxMana: 150
-  fManaRegen: 1
+  fManaRegen: 2.5
+  fJumpAmount: 5
+  fJumpDelay: 0.1

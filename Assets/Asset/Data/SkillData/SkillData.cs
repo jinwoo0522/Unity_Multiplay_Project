@@ -1,5 +1,11 @@
 using UnityEngine;
 
+public enum CooldownTiming
+{
+    ON_CAST,
+    ON_END,
+}
+
 [CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
 public class SkillData : ScriptableObject
 {
@@ -13,5 +19,10 @@ public class SkillData : ScriptableObject
     public float fAirborneDecay;
     public float fFreezeTime;
     public float fManaCost;
+    public float fManaCostPerSecond;
+    public float fHealAmountPerSecond;
     public float fCooldown;
+    [SerializeField] private CooldownTiming _cooldownTiming;
+
+    public CooldownTiming CooldownTiming => _cooldownTiming;
 }

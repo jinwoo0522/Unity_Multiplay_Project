@@ -48,11 +48,11 @@ public class Elf_Player : Player
 
        // 공통 상태에서 분리된 Elf 전용 스킬 전환을 외부 주입 (Golem은 등록하지 않음)
        _stateMachine.AddTransition((ushort)ENTITY.StateType.IDLE, new StateToMouseAttack_Elf(this));
-       _stateMachine.AddTransition((ushort)ENTITY.StateType.IDLE, new StateToQSkill_Elf(_input, _upperStateMachine));
+       _stateMachine.AddTransition((ushort)ENTITY.StateType.IDLE, new StateToQSkill_Elf(this));
        _stateMachine.AddTransition((ushort)ENTITY.StateType.WALK, new StateToMouseAttack_Elf(this));
-       _stateMachine.AddTransition((ushort)ENTITY.StateType.WALK, new StateToQSkill_Elf(_input, _upperStateMachine));
+       _stateMachine.AddTransition((ushort)ENTITY.StateType.WALK, new StateToQSkill_Elf(this));
        _stateMachine.AddTransition((ushort)ENTITY.StateType.RUN, new StateToMouseAttack_Elf(this));
-       _stateMachine.AddTransition((ushort)ENTITY.StateType.RUN, new StateToQSkill_Elf(_input, _upperStateMachine));
+       _stateMachine.AddTransition((ushort)ENTITY.StateType.RUN, new StateToQSkill_Elf(this));
     }
 
     void CreateUpperState()

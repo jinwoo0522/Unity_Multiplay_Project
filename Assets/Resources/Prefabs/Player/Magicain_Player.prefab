@@ -512,6 +512,7 @@ GameObject:
   - component: {fileID: 702834450106528201}
   - component: {fileID: 3069796688563442396}
   - component: {fileID: 4870188770053609064}
+  - component: {fileID: 675189881195598282}
   m_Layer: 7
   m_Name: Magicain_Player
   m_TagString: Player
@@ -903,6 +904,24 @@ MonoBehaviour:
     data: {fileID: 11400000, guid: 7824e62328a64f3aaf5818b1c3f1d5e1, type: 2}
   - type: 2
     data: {fileID: 11400000, guid: 477143663ce74237b977f2909193eceb, type: 2}
+--- !u!114 &675189881195598282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7576251448233022070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa78fdd98390cff48a17313f3eefb3c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillCooldownUIBinder
+  ShowTopMostFoldoutHeaderGroup: 1
+  _slotBindings:
+  - _skillType: 1
+    _slot: 0
+  - _skillType: 2
+    _slot: 1
 --- !u!1 &8304582804339889416
 GameObject:
   m_ObjectHideFlags: 0

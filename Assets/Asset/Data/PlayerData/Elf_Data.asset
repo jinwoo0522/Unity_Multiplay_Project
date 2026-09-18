@@ -19,7 +19,7 @@ MonoBehaviour:
   fWalkSpeed: 3
   fRunSpeed: 4.5
   fMaxMana: 100
-  fManaRegen: 2
+  fManaRegen: 1
   fJumpAmount: 3
   fGravity: -9.8
   fJumpDelay: 0.1

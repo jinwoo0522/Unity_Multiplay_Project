@@ -17,11 +17,13 @@ public class SkillEffector : NetworkBehaviour, ISkillModule
         [SerializeField] private EffectStartTiming _startTiming;  // 시작 시점
         [SerializeField] private EffectEndTiming   _endTiming;    // 종료 시점
         [SerializeField] private bool              _bFollow;      // 스킬을 따라 이동시킬지(부모 부착)
+        [SerializeField] private Vector3           _vPositionOffset;
 
         public PoolObjectType    Effect      => _effectType;
         public EffectStartTiming StartTiming => _startTiming;
         public EffectEndTiming   EndTiming   => _endTiming;
         public bool              Follow      => _bFollow;
+        public Vector3           PositionOffset => _vPositionOffset;
     }
 
     [SerializeField] private List<EffectInfo> _effects = new List<EffectInfo>();
@@ -72,7 +74,7 @@ public class SkillEffector : NetworkBehaviour, ISkillModule
         if (isCanCache && _activeEffects.ContainsKey(iIndex)) return;   // 이미 재생 중 — 1:1
 
         EffectView effect = GameManager.Instance.objectPoolManager.Get<EffectView>(_effects[iIndex].Effect);
-        effect.Play(position, rotation);
+        effect.Play(position, rotation, _effects[iIndex].PositionOffset);
         effect.gameObject.SetActive(true);
 
         if (isFollow)   effect.Attach(transform);       // 스킬을 따라 이동(부모 부착)

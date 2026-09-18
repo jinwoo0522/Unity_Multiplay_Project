@@ -5,9 +5,11 @@ using UnityEngine;
 public class BattleUIManager : MonoBehaviour
 {
     [SerializeField] private PlayerHUD _playerHUD;
+    [SerializeField] private SkillCooldownUI _skillCooldownUI;
 
     private NetworkObject _boundPlayer;
     private PlayerHUDBinder _hudBinder;
+    private SkillCooldownUIBinder _skillCooldownBinder;
     private Coroutine _trackRoutine;
 
     private void OnEnable()
@@ -51,7 +53,9 @@ public class BattleUIManager : MonoBehaviour
     {
         _boundPlayer = player;
         _hudBinder = player.GetComponent<PlayerHUDBinder>();
+        _skillCooldownBinder = player.GetComponent<SkillCooldownUIBinder>();
         _hudBinder.Bind(_playerHUD);
+        _skillCooldownBinder.Bind(_skillCooldownUI);
     }
 
     private void Unbind()
@@ -59,7 +63,11 @@ public class BattleUIManager : MonoBehaviour
         if (_hudBinder != null)
             _hudBinder.Unbind();
 
+        if (_skillCooldownBinder != null)
+            _skillCooldownBinder.Unbind();
+
         _hudBinder = null;
+        _skillCooldownBinder = null;
         _boundPlayer = null;
     }
 }

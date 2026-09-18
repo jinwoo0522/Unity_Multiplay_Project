@@ -22,3 +22,7 @@ MonoBehaviour:
   fAirborneDecay: 0
   fFreezeTime: 0
   fManaCost: 20
+  fManaCostPerSecond: 0
+  fHealAmountPerSecond: 0
+  fCooldown: 5
+  _cooldownTiming: 0

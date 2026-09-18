@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 6726639379103552195}
   - component: {fileID: 2134949363504026889}
   - component: {fileID: 255810753664590672}
+  - component: {fileID: 1020476599546584796}
   m_Layer: 7
   m_Name: Golem_Player
   m_TagString: Player
@@ -791,6 +792,24 @@ MonoBehaviour:
     data: {fileID: 11400000, guid: 7d181ed0011d4ce68d65d4be397509fe, type: 2}
   - type: 4
     data: {fileID: 11400000, guid: 365b5a33ebf6480cb2a9988e8f41c18e, type: 2}
+--- !u!114 &1020476599546584796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4754220212716445872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa78fdd98390cff48a17313f3eefb3c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillCooldownUIBinder
+  ShowTopMostFoldoutHeaderGroup: 1
+  _slotBindings:
+  - _skillType: 4
+    _slot: 0
+  - _skillType: 3
+    _slot: 1
 --- !u!1 &4993173485944839245
 GameObject:
   m_ObjectHideFlags: 0

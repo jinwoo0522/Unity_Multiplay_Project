@@ -6,12 +6,14 @@ public class StateToQSkill_Elf : ITransition
 
     IEntityInputState _inputState;
     private StateMachine _upperStateMachine;
+    private SkillCaster _skillCaster;
 
 
-    public StateToQSkill_Elf(IEntityInputState input, StateMachine upperStateMachine)
+    public StateToQSkill_Elf(Elf_Player player)
     {
-        _inputState = input;
-        _upperStateMachine = upperStateMachine;
+        _inputState = player._input;
+        _upperStateMachine = player._upperStateMachine;
+        _skillCaster = player._skillCaster;
     }
     public bool CheckRule(float fTimeDelta)
     {
@@ -19,10 +21,11 @@ public class StateToQSkill_Elf : ITransition
         if(_upperStateMachine.CurrentState != (ushort)ENTITY.UpperStateType.IDLE)
             return false;
 
-        if((_inputState.inputState & (ushort)ENTITY.InputFlagType.Q) != 0)
-            return true;
+        if((_inputState.inputState & (ushort)ENTITY.InputFlagType.Q) == 0)
+            return false;
 
-        return false;
+        return _skillCaster.HasMana()
+            && _skillCaster.CanCast(NetworkObjectType.ELF_Q_SKILL);
     }
 
     public void OnTransition()

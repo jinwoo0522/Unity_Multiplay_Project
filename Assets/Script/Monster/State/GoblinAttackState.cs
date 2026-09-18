@@ -8,6 +8,7 @@ public class GoblinAttackState : EntityState
     private EntityAnimator _aniController;
     private NavMeshAgent _agent;
     private Transform _transform;
+    private MonsterTargeter _targeter;
     private IHitter _hitter;
     private Stat _stat;
     private IEffector _effector;
@@ -22,6 +23,7 @@ public class GoblinAttackState : EntityState
         _aniController = goblin._aniController;
         _agent = goblin._agent;
         _transform = goblin.transform;
+        _targeter = goblin._targeter;
         _hitter = goblin._hitter;
         _stat = goblin._stat;   
         _effector = goblin._effector;
@@ -51,6 +53,19 @@ public class GoblinAttackState : EntityState
 
     protected override void UpdateState(float fTimedelta, ushort curState)
     {
+        if(_targeter.Target != null)
+        {
+            Vector3 vDirection = _targeter.Target.position - _transform.position;
+            vDirection.y = 0f;
+
+            if(vDirection.sqrMagnitude >= 0.0001f)
+            {
+                Quaternion qTarget = Quaternion.LookRotation(vDirection);
+                _transform.rotation = Quaternion.RotateTowards(
+                    _transform.rotation, qTarget, _agent.angularSpeed * fTimedelta);
+            }
+        }
+
         _move.Gravity();
     }
     void EventFunc()

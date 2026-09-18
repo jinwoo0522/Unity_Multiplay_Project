@@ -87,6 +87,13 @@ public class Skill : NetworkBehaviour , IPoolable
         GameObject.Destroy(gameObject);
     }
 
+    public override void OnNetworkDespawn()
+    {
+        if (IsServer == false) return;
+        if (_data.CooldownTiming == CooldownTiming.ON_END)
+            Owner.GetComponent<SkillCaster>().StartCooldown(Type);
+    }
+
     [ServerRpc]
     protected virtual void DespawnSkill_ServerRpc()
     {

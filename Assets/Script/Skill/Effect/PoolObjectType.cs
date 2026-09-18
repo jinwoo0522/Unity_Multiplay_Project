@@ -11,4 +11,5 @@ public enum PoolObjectType
     FROZEN_SMOKE_EFFECT,
     HIT_STONE_EFFECT,
     ELF_MOUSE_SKILL_EFFECT,
+    ELF_Q_SKILL_EFFECT,
 }
