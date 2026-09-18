@@ -13,5 +13,7 @@ public class SkillData : ScriptableObject
     public float fAirborneDecay;
     public float fFreezeTime;
     public float fManaCost;
+    public float fManaCostPerSecond;
+    public float fHealAmountPerSecond;
     public float fCooldown;
 }

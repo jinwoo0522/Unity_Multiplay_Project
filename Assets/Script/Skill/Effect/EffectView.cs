@@ -19,6 +19,12 @@ public class EffectView : MonoBehaviour, IPoolable
     // 지정 위치/회전에서 재생 (SkillEffector가 위치를 지정한 뒤 호출)
     public void Play(Vector3 vPosition, Quaternion qRotation)
     {
+        Play(vPosition, qRotation, Vector3.zero);
+    }
+
+    public void Play(Vector3 vPosition, Quaternion qRotation, Vector3 vPositionOffset)
+    {
+        vPosition += qRotation * vPositionOffset;
         transform.SetPositionAndRotation(vPosition, qRotation);
         _particle.Play();
     }

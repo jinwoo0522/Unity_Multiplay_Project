@@ -2546,6 +2546,8 @@ MonoBehaviour:
   _skills:
   - type: 5
     data: {fileID: 11400000, guid: fd3707df13236da4593d895a4977872e, type: 2}
+  - type: 6
+    data: {fileID: 11400000, guid: 7074bb826a33a214395674d29333c6b6, type: 2}
 --- !u!1 &3648312818719334364
 GameObject:
   m_ObjectHideFlags: 0
