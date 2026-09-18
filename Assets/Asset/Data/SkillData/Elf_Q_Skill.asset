@@ -25,4 +25,5 @@ MonoBehaviour:
   fManaCostPerSecond: 15
   fHealAmountPerSecond: 15
   fCooldown: 3
+  _icon: {fileID: 21300000, guid: 5f0125b5dcf9744488187000a6830636, type: 3}
   _cooldownTiming: 1

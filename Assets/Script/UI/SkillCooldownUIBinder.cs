@@ -36,6 +36,7 @@ public class SkillCooldownUIBinder : NetworkBehaviour
             SlotBinding binding = _slotBindings[i];
             if (_skillCaster.TryGetSkillData(binding.SkillType, out SkillData data) == false) continue;
 
+            _ui.SetIcon(binding.Slot, data.Icon);
             _ui.SetCooldown(
                 binding.Slot,
                 _skillCaster.GetRemainingLocalCooldown(binding.SkillType),
