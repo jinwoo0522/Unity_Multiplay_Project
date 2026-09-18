@@ -64,7 +64,7 @@ public class MagicianMouseSkillState : EntityState
 
         Vector3 vSkillPos = new Vector3(0f , _fSkillHeight , 0f) + hit.point;
 
-        GameManager.Instance.skillFactory.Create(
-            NetworkObjectType.STORM, vSkillPos, Vector2.zero, _player.OwnerClientId, _player.gameObject);
+        _player._skillCaster.TryCast(
+            NetworkObjectType.STORM, vSkillPos, Vector2.zero);
     }
 }

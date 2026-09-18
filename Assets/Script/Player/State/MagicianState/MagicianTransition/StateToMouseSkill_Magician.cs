@@ -11,6 +11,7 @@ public class StateToMouseSkill_Magician : ITransition
     private LayerMask _groundMask;
     private Transform _headPos;
     private StateMachine _upperStateMachine;
+    private SkillCaster _skillCaster;
 
     private const float fMaxRayDistance = 15f;   // 이 거리 안에서 그라운드에 맞아야 전환
 
@@ -21,6 +22,7 @@ public class StateToMouseSkill_Magician : ITransition
         _groundMask = groundMask;
         _headPos = headPos;
         _upperStateMachine = player._upperStateMachine;
+        _skillCaster = player._skillCaster;
     }
 
     public bool CheckRule(float fTimeDelta)
@@ -45,7 +47,7 @@ public class StateToMouseSkill_Magician : ITransition
 
 
         // 5m 이내 그라운드에 맞지 않거나 아무것도 못 맞으면 전환 안 함
-        return isHit;
+        return isHit && _skillCaster.CanCast(NetworkObjectType.STORM);
     }
 
     public void OnTransition()

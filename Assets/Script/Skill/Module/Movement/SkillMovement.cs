@@ -12,7 +12,7 @@ public class SkillMovement : ISkillModule
     public void Bind(Skill skill)
     {
         for (int i = 0; i < _movements.Count; ++i)
-            _movements[i].Bind(skill.transform);
+            _movements[i].Bind(skill);
     }
 
     // 발동 — 각 이동 모듈 상태 초기화

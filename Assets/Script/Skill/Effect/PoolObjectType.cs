@@ -10,4 +10,5 @@ public enum PoolObjectType
     MOTION_TRAIL_OBJECT,
     FROZEN_SMOKE_EFFECT,
     HIT_STONE_EFFECT,
+    ELF_MOUSE_SKILL_EFFECT,
 }

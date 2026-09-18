@@ -7,7 +7,6 @@ using UnityEngine;
 public class FreezeOnCollision : ICollisionEventModule
 {
     [SerializeField] private CollisionTiming _timing = CollisionTiming.ENTER; // 빙결 판정 시점(진입/겹침)
-    [SerializeField] private float _fFreezeTime;   // 빙결 지속시간(초)
 
     private Skill _skill;
 
@@ -22,6 +21,6 @@ public class FreezeOnCollision : ICollisionEventModule
         if (col.TryGetComponent(out CrowdController crowdController) == false) return;
 
         crowdController.Apply(CrowdController.CC_TAG.FREEZE,
-            new ICrowdControl.CCData(_fFreezeTime));
+            new ICrowdControl.CCData(_skill.Data.fFreezeTime));
     }
 }

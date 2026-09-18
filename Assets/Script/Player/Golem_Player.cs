@@ -50,12 +50,12 @@ public class Golem_Player : Player
         _stateMachine.CreateAnyTransition(new AnyToFrozen_Entity(_crowdController));
 
 
-        _stateMachine.AddTransition((ushort)ENTITY.StateType.IDLE, new StateToMouseAttack_Golem(_input, _upperStateMachine));
-       _stateMachine.AddTransition((ushort)ENTITY.StateType.IDLE, new StateToQSkill_Golem(_input, _upperStateMachine));
-       _stateMachine.AddTransition((ushort)ENTITY.StateType.WALK, new StateToMouseAttack_Golem(_input, _upperStateMachine));
-       _stateMachine.AddTransition((ushort)ENTITY.StateType.WALK, new StateToQSkill_Golem(_input, _upperStateMachine));
-       _stateMachine.AddTransition((ushort)ENTITY.StateType.RUN, new StateToMouseAttack_Golem(_input, _upperStateMachine));
-       _stateMachine.AddTransition((ushort)ENTITY.StateType.RUN, new StateToQSkill_Golem(_input, _upperStateMachine));
+        _stateMachine.AddTransition((ushort)ENTITY.StateType.IDLE, new StateToMouseAttack_Golem(this));
+       _stateMachine.AddTransition((ushort)ENTITY.StateType.IDLE, new StateToQSkill_Golem(this));
+       _stateMachine.AddTransition((ushort)ENTITY.StateType.WALK, new StateToMouseAttack_Golem(this));
+       _stateMachine.AddTransition((ushort)ENTITY.StateType.WALK, new StateToQSkill_Golem(this));
+       _stateMachine.AddTransition((ushort)ENTITY.StateType.RUN, new StateToMouseAttack_Golem(this));
+       _stateMachine.AddTransition((ushort)ENTITY.StateType.RUN, new StateToQSkill_Golem(this));
     }
 
     void CreateUpperState()

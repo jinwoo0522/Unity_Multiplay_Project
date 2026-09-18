@@ -2,8 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// 화면 좌측 하단 HUD — owner의 이름·HP·마나를 표시하는 씬 단일 오브젝트.
-// SkillCooldownUI와 동일 패턴: owner가 FindAnyObjectByType로 탐색 후 Stat.BindOwnerHUD를 통해 연결.
+// 화면 좌측 하단 HUD — 로컬 플레이어의 이름·HP·마나를 표시하는 씬 단일 오브젝트.
+// BattleUIManager가 로컬 플레이어의 PlayerHUDBinder에 전달해 연결한다.
 public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _nameText;

@@ -4,7 +4,6 @@ using UnityEngine;
 public class DamageOnCollision : ICollisionEventModule
 {
     [SerializeField] private CollisionTiming _timing = CollisionTiming.ENTER; // 캐스트 반응 시점
-    [SerializeField] private float _fBaseDamage;   // 기본 데미지 — Owner 공격력에 가산
 
     private Skill _skill;
 
@@ -25,5 +24,5 @@ public class DamageOnCollision : ICollisionEventModule
 
     // 최종 데미지 = Owner 현재 공격력 + 기본 데미지
     private float FinalDamage()
-        => _skill.Owner.GetComponent<Stat>().Get_Stat(Stat.STAT_TAG.DAMAGE) + _fBaseDamage;
+        => _skill.Owner.GetComponent<Stat>().Get_Stat(Stat.STAT_TAG.DAMAGE) + _skill.Data.fDamage;
 }

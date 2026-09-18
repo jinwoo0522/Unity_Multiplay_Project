@@ -28848,6 +28848,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2339064603081033800, guid: 0321a9e1f417b5a4baad9f3b5d3353b7, type: 3}
   m_PrefabInstance: {fileID: 544351930}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &544990289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 544990291}
+  - component: {fileID: 544990290}
+  m_Layer: 0
+  m_Name: UIBattleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &544990290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544990289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca769dcb87678a4083cf30d34830880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleUIManager
+  _playerHUD: {fileID: 778237080}
+--- !u!4 &544990291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544990289}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.82126, y: -1, z: 2.44715}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &546990176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74025,6 +74070,7 @@ GameObject:
   - component: {fileID: 1432557283}
   - component: {fileID: 1432557282}
   - component: {fileID: 1432557281}
+  - component: {fileID: 1432557285}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -74120,6 +74166,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1432557285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432557280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca769dcb87678a4083cf30d34830880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleUIManager
+  _playerHUD: {fileID: 778237080}
 --- !u!1001 &1434112232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111465,6 +111524,14 @@ PrefabInstance:
       propertyPath: _goblin
       value: 
       objectReference: {fileID: 3913431552995139036}
+    - target: {fileID: 5071690960962176640, guid: 833ea63f9545ca345827630b14b322e3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5071690960962176640, guid: 833ea63f9545ca345827630b14b322e3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5300081108203809996, guid: 833ea63f9545ca345827630b14b322e3, type: 3}
       propertyPath: m_Height
       value: 1.5
@@ -111532,3 +111599,4 @@ SceneRoots:
   - {fileID: 3913431552995139033}
   - {fileID: 1001479250}
   - {fileID: 1605738141}
+  - {fileID: 544990291}

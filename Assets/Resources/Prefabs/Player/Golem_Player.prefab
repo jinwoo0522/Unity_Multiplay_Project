@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 4856361388078937898}
   - component: {fileID: 6726639379103552195}
   - component: {fileID: 2134949363504026889}
+  - component: {fileID: 255810753664590672}
   m_Layer: 7
   m_Name: Golem_Player
   m_TagString: Player
@@ -677,7 +678,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player_NetworkSpawn
   ShowTopMostFoldoutHeaderGroup: 1
   canvas: {fileID: 4830077136283002141}
-  ClientText: {fileID: 2120508504997483314}
 --- !u!114 &7945206968767576671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,7 +711,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUDBinder
   ShowTopMostFoldoutHeaderGroup: 1
-  _hpTopSlider: {fileID: 1690037974995541514}
 --- !u!114 &4856361388078937898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,6 +773,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822786ba6ff2e745a17a4a71717a9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDamage
+--- !u!114 &255810753664590672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4754220212716445872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37709ea2bf62ca4b91e0a4ece7a501e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillCaster
+  ShowTopMostFoldoutHeaderGroup: 1
+  _skills:
+  - type: 3
+    data: {fileID: 11400000, guid: 7d181ed0011d4ce68d65d4be397509fe, type: 2}
+  - type: 4
+    data: {fileID: 11400000, guid: 365b5a33ebf6480cb2a9988e8f41c18e, type: 2}
 --- !u!1 &4993173485944839245
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +976,8 @@ GameObject:
   - component: {fileID: 4830077136283002141}
   - component: {fileID: 5745144521750813046}
   - component: {fileID: 2182679839907658649}
+  - component: {fileID: 3602227036468879978}
+  - component: {fileID: 1882602639952266183}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -1063,6 +1082,35 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3602227036468879978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7356888335282197326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a46abb7772a30f4e8224938f8df3af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldHPView
+  _hpSlider: {fileID: 1690037974995541514}
+  _nameText: {fileID: 8730699253197971007}
+--- !u!114 &1882602639952266183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7356888335282197326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a3f83795232a54782d00103d7b4539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldHPPresenter
+  _view: {fileID: 3602227036468879978}
+  _stat: {fileID: 6478216061000630281}
+  _data: {fileID: 0}
 --- !u!1001 &1569359776053247492
 PrefabInstance:
   m_ObjectHideFlags: 0

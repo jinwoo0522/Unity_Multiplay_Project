@@ -45,7 +45,7 @@ public class MagicainUpperAttackState : EntityState
         // 조준 방향은 입력이 서버로 동기화 — 카메라를 직접 읽지 않고 소비만 한다 (상하 포함)
         Vector3 vDir = _player._input.AimDir;
 
-        GameManager.Instance.skillFactory.Create(
-            NetworkObjectType.ELECTRONIC_SKILL, _shootPos.position, vDir, _player.OwnerClientId, _player.gameObject);
+        _player._skillCaster.TryCast(
+            NetworkObjectType.ELECTRONIC_SKILL, _shootPos.position, vDir);
     }
 }

@@ -48,6 +48,14 @@ public class PoolResourceLoader
             return;
         }
         prefabs.Add(Fire_Buff);
+
+        GameObject elfMouseSkill = Resources.Load<GameObject>("Prefabs/Skill/Elf_Mouse_Skill");
+        if (elfMouseSkill == null)
+        {
+            GameManager.Instance.DebugMessage<PoolResourceLoader>("Elf_Mouse_Skill 스킬 NULL");
+            return;
+        }
+        prefabs.Add(elfMouseSkill);
     }
 
     // 로컬(이펙트) 프리팹 로드 — enum 순서와 로드 순서를 일치시킨다
@@ -130,5 +138,13 @@ public class PoolResourceLoader
             return;
         }
         prefabs.Add(Hit_stone);
+
+        GameObject elfMouseSkill = Resources.Load<GameObject>("Prefabs/Effect/Elf/Elf_Mouse_Skill_Effect");
+        if (elfMouseSkill == null)
+        {
+            GameManager.Instance.DebugMessage<PoolResourceLoader>("Elf_Mouse_Skill_Effect 이펙트 NULL");
+            return;
+        }
+        prefabs.Add(elfMouseSkill);
     }
 }

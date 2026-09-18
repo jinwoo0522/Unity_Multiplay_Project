@@ -60,7 +60,7 @@ public class Magician_Player : Player
         // 피격 반응 — 서버에서 데미지 판정 후 IDamagable(Stat)을 통해 HIT 전환 트리거
         _upperStateMachine.CreateAnyTransition(new AnyToHit_Player(_upperAniController, _damagable));
 
-        _upperStateMachine.AddTransition((ushort)ENTITY.UpperStateType.IDLE, new IdleToMagicianAttack_Magician(_input));
-        _upperStateMachine.AddTransition((ushort)ENTITY.UpperStateType.IDLE, new IdleToMagicianQSkill_Magician(_input));
+        _upperStateMachine.AddTransition((ushort)ENTITY.UpperStateType.IDLE, new IdleToMagicianAttack_Magician(this));
+        _upperStateMachine.AddTransition((ushort)ENTITY.UpperStateType.IDLE, new IdleToMagicianQSkill_Magician(this));
     }
 }

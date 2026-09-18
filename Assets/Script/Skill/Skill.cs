@@ -9,7 +9,9 @@ public class Skill : NetworkBehaviour , IPoolable
     public IPoolReturner Handler { get; set; }
     public GameObject Owner {get; private set;}
     public SkillEffector Effector => _effector;
+    public SkillData Data => _data;
     
+    [SerializeField] private SkillData _data;
     [SerializeField] private SkillEffector _effector;
     private ulong  ClinetID;
     private ISkillModule _effectorModule;   // 이펙터를 모듈로 취급 — DIM 기본 구현을 쓰려면 인터페이스 경유 호출 필요

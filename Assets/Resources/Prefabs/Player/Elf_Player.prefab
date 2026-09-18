@@ -1370,6 +1370,8 @@ GameObject:
   - component: {fileID: 7204257966541376641}
   - component: {fileID: 3237082420058888476}
   - component: {fileID: 6546562419864477195}
+  - component: {fileID: 6655556565638595376}
+  - component: {fileID: 8330962787581665301}
   m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
@@ -1474,6 +1476,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d8b304c9d25da488200c098d6d5b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_Billboard
+--- !u!114 &6655556565638595376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869214497352339757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a46abb7772a30f4e8224938f8df3af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldHPView
+  _hpSlider: {fileID: 8722159585728664645}
+  _nameText: {fileID: 1390436511045606880}
+--- !u!114 &8330962787581665301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869214497352339757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a3f83795232a54782d00103d7b4539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldHPPresenter
+  _view: {fileID: 6655556565638595376}
+  _stat: {fileID: -1277385285328050177}
+  _data: {fileID: 0}
 --- !u!1 &1904584666382745149
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,6 +2120,7 @@ GameObject:
   - component: {fileID: 9124449192949097940}
   - component: {fileID: 51585232012607564}
   - component: {fileID: 2510972819616107634}
+  - component: {fileID: 4738739508769453788}
   m_Layer: 7
   m_Name: Elf_Player
   m_TagString: Player
@@ -2324,7 +2356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player_NetworkSpawn
   ShowTopMostFoldoutHeaderGroup: 1
   canvas: {fileID: 326980205101692998}
-  ClientText: {fileID: 2357652750352113885}
 --- !u!114 &67922901575824775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2401,7 +2432,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUDBinder
   ShowTopMostFoldoutHeaderGroup: 1
-  _hpTopSlider: {fileID: 8722159585728664645}
 --- !u!114 &1102142476755284709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2500,6 +2530,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822786ba6ff2e745a17a4a71717a9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDamage
+--- !u!114 &4738739508769453788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3448056407326184070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37709ea2bf62ca4b91e0a4ece7a501e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillCaster
+  ShowTopMostFoldoutHeaderGroup: 1
+  _skills:
+  - type: 5
+    data: {fileID: 11400000, guid: fd3707df13236da4593d895a4977872e, type: 2}
 --- !u!1 &3648312818719334364
 GameObject:
   m_ObjectHideFlags: 0

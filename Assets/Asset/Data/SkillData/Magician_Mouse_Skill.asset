@@ -12,19 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6421ef99e0d356d4b997246a50f612c8, type: 3}
   m_Name: Magician_Mouse_Skill
   m_EditorClassIdentifier: 
-  strName: "\uB9C8\uBC95\uC0AC \uB9C8\uC6B0\uC2A4 \uC2A4\uD0AC"
   fSpeed: 0
-  fAcceleration: 0
-  fLifeTime: 5
-  fDamage: 10
-  fRadius: 5
-  nPoolSize: 5
-  prefab: {fileID: 2097945750343530869, guid: 0556820aa74be1d4ba502f3a87133b61, type: 3}
-  _fCooldown: 15
-  _strSkillState: Standing 2H Magic Area Attack 01
-  _fKnockback: 3
-  _fLaunchForce: 0
-  _fSlowMultiplier: 3
-  _fSlowDuration: 3
-  _fFreezeDuration: 0
-  _fManaCost: 30
+  fLifetime: 3
+  fDamage: 12
+  fRadius: 3
+  fKnockbackPower: 0
+  fKnockbackDecay: 0
+  fAirbornePower: 0
+  fAirborneDecay: 0
+  fFreezeTime: 0
+  fManaCost: 30
+  fCooldown: 15
