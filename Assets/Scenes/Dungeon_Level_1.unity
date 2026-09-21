@@ -19597,20 +19597,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawner
   ShowTopMostFoldoutHeaderGroup: 1
-  PlayerPrefebs:
+  _playerPrefabs:
   - {fileID: 4754220212716445872, guid: 8447b0bd7afe13f4496fbd91d2ffa9d3, type: 3}
   - {fileID: 7576251448233022070, guid: fde9f399b6c99fa4dad54f521a5b15e0, type: 3}
   - {fileID: 3448056407326184070, guid: 155645276b2f4844da5a5c6bc4536d67, type: 3}
-  SpawnPoints:
+  _spawnPoints:
   - {fileID: 1995008789}
   - {fileID: 1995008789}
   - {fileID: 1995008789}
-  Magician_Btn: {fileID: 353790021}
-  Golem_Btn: {fileID: 184865709}
-  Elf_Btn: {fileID: 458340797}
-  hudUI: {fileID: 1011196014}
-  SkillCoolTimeUI: {fileID: 778237078}
-  PlayerCamera: {fileID: 1606784507}
 --- !u!4 &345306788
 Transform:
   m_ObjectHideFlags: 0
@@ -36752,6 +36746,8 @@ GameObject:
   m_Component:
   - component: {fileID: 688900113}
   - component: {fileID: 688900114}
+  - component: {fileID: 688900115}
+  - component: {fileID: 688900116}
   m_Layer: 5
   m_Name: ChoiceBtns
   m_TagString: Untagged
@@ -36807,6 +36803,37 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &688900115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688900112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a59e5259dcfed4ca7f7ffae051681c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSelectView
+  _magicianButton: {fileID: 353790021}
+  _golemButton: {fileID: 184865709}
+  _elfButton: {fileID: 458340797}
+  _hudUI: {fileID: 1011196014}
+  _skillCoolTimeUI: {fileID: 778237078}
+--- !u!114 &688900116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688900112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee4c58234679504b880a896f3e42a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSelectPresenter
+  _view: {fileID: 688900115}
+  _playerSpawner: {fileID: 345306787}
 --- !u!1001 &688941121
 PrefabInstance:
   m_ObjectHideFlags: 0

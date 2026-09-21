@@ -1,67 +1,27 @@
-using Unity.Cinemachine;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
+
+public enum PLAYER_INDEX
+{
+    GOLEM,
+    MAGICIAN,
+    ELF
+}
 
 public class PlayerSpawner : NetworkBehaviour
 {
-    enum PLAYER_INDEX
+    [FormerlySerializedAs("PlayerPrefebs")]
+    [SerializeField] private GameObject[] _playerPrefabs;
+    [FormerlySerializedAs("SpawnPoints")]
+    [SerializeField] private Transform[] _spawnPoints;
+
+    public void RequestSpawnPlayer(PLAYER_INDEX characterIndex)
     {
-        GOLEM,
-        MAGICIAN,
-        ELF
-    }
-    [SerializeField]
-    GameObject[] PlayerPrefebs;
-    [SerializeField]
-    Transform[] SpawnPoints;
-    [SerializeField]
-    Button Magician_Btn;
-    [SerializeField]
-    Button Golem_Btn;
-    [SerializeField]
-    Button Elf_Btn;
-    [SerializeField]
-    GameObject hudUI;
-    [SerializeField]
-    GameObject SkillCoolTimeUI;
-    [SerializeField]
-    CinemachineCamera PlayerCamera;
-
-    public override void OnNetworkSpawn()
-    {
-        if (!IsClient) return;
-
-        GameObject parent = Golem_Btn.GetComponent<Transform>().parent.gameObject;
-
-        Magician_Btn.onClick.AddListener(() =>
-        {
-             RequestSpawnPlayerServerRpc(PLAYER_INDEX.MAGICIAN);
-             parent.SetActive(false);
-             hudUI.SetActive(true);
-             SkillCoolTimeUI.SetActive(true);
-        });
-
-        Golem_Btn.onClick.AddListener(() =>
-        {
-             RequestSpawnPlayerServerRpc(PLAYER_INDEX.GOLEM);
-             parent.SetActive(false);
-             hudUI.SetActive(true);
-             SkillCoolTimeUI.SetActive(true);
-        });
-
-        Elf_Btn.onClick.AddListener(() =>
-        {
-             RequestSpawnPlayerServerRpc(PLAYER_INDEX.ELF);
-             parent.SetActive(false);
-             hudUI.SetActive(true);
-             SkillCoolTimeUI.SetActive(true);
-        });
-
+        RequestSpawnPlayerServerRpc(characterIndex);
     }
 
-    void ChoicePlayer(ulong clientID , PLAYER_INDEX index)
+    private void ChoicePlayer(ulong clientID, PLAYER_INDEX index)
     {
         if(IsServer == false)
             return;
@@ -73,9 +33,9 @@ public class PlayerSpawner : NetworkBehaviour
         }
         
         GameObject Player = Instantiate(
-        PlayerPrefebs[(int)index], 
-        SpawnPoints[(int)index].position,
-        SpawnPoints[(int)index].rotation);
+        _playerPrefabs[(int)index],
+        _spawnPoints[(int)index].position,
+        _spawnPoints[(int)index].rotation);
 
         if(Player == null)
         {
