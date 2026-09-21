@@ -18,13 +18,16 @@ public class MaterialChanger : NetworkBehaviour
     private IStateMaterial _currentMat;
     private bool _isChanged;
 
-    private SkinnedMeshRenderer[] _renderers;
+    private Renderer[] _renderers;
     private Material[][] _originMats;   // 렌더러별 원본 머티리얼 배열
 
     public override void OnNetworkSpawn()
     {
-        // 캐릭터가 여러 조각으로 나뉘어 있어 자식 렌더러를 전부 잡아야 한다 (골렘 5조각)
-        _renderers = GetComponentsInChildren<SkinnedMeshRenderer>(true);
+        // 몸·무기처럼 별도 메시로 구성된 파츠까지 상태 머티리얼을 적용한다
+        List<Renderer> renderers = new();
+        renderers.AddRange(GetComponentsInChildren<SkinnedMeshRenderer>(true));
+        renderers.AddRange(GetComponentsInChildren<MeshRenderer>(true));
+        _renderers = renderers.ToArray();
         _originMats = new Material[_renderers.Length][];
 
         for (int i = 0; i < _renderers.Length; ++i)
