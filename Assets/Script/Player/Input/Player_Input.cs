@@ -43,6 +43,30 @@ public class Player_Input : NetworkBehaviour , IEntityMoveInput , IEntityInputSt
         _inputAction.actions["Player/Q"].performed += OnQSkillPerformed;
         _inputAction.actions["Player/Q"].canceled += OnQSkillCanceled;
     }
+
+    public override void OnNetworkDespawn()
+    {
+        if(_inputAction == null) return;
+
+        _inputAction.actions["Player/Move"].performed -= OnMovePerformed;
+        _inputAction.actions["Player/Move"].canceled -= OnMoveCanceled;
+
+        _inputAction.actions["Player/Sprint"].performed -= OnSprintPerformed;
+        _inputAction.actions["Player/Sprint"].canceled -= OnSprintCanceled;
+
+        _inputAction.actions["Player/Jump"].performed -= OnJumpPerformed;
+        _inputAction.actions["Player/Jump"].canceled -= OnJumpCanceled;
+
+        _inputAction.actions["Player/Attack"].performed -= OnAttackPerformed;
+        _inputAction.actions["Player/Attack"].canceled -= OnAttackCanceled;
+
+        _inputAction.actions["Player/Attack_Skill"].performed -= OnAttack_SkillPerformed;
+        _inputAction.actions["Player/Attack_Skill"].canceled -= OnAttack_SkillCanceled;
+
+        _inputAction.actions["Player/Q"].performed -= OnQSkillPerformed;
+        _inputAction.actions["Player/Q"].canceled -= OnQSkillCanceled;
+    }
+
     // 조준 방향은 로컬 카메라(시네머신)에만 존재 → Owner가 서버로 동기화
     private void Update()
     {

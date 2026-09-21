@@ -50,10 +50,18 @@ public abstract class EntityDamage : MonoBehaviour , IDamagable
 
         bool isDead = _stat.Get_Stat(Stat.STAT_TAG.HP) < 0f;
 
-        // 사망으로 넘어가는 순간에만 CC를 전부 해제한다 — 시체에 빙결 머티리얼·에어본 이동이 남지 않게
-        if(_isDead == false && isDead == true)
-            _crowdController.RestoreAll();
-
+        bool isJustDied = _isDead == false && isDead == true;
         _isDead = isDead;
+
+        // 사망으로 넘어가는 순간에만 CC를 전부 해제한다 — 시체에 빙결 머티리얼·에어본 이동이 남지 않게
+        if(isJustDied == true)
+        {
+            _crowdController.RestoreAll();
+            OnDeath();
+        }
+    }
+
+    protected virtual void OnDeath()
+    {
     }
 }
