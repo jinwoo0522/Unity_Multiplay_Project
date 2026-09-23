@@ -71,6 +71,50 @@ public class Stat : NetworkBehaviour
     {
         return StatList[(int)tag];
     }
+
+    public float TakeDamage(float fDamage, Transform attacker)
+    {
+        if (IsServer == false || fDamage <= 0f) return 0f;
+
+        float fAppliedDamage = Mathf.Min(Get_Stat(STAT_TAG.HP), fDamage);
+        Set_Stat(STAT_TAG.HP, Get_Stat(STAT_TAG.HP) - fAppliedDamage);
+
+        if (fAppliedDamage > 0f && attacker != null && attacker.gameObject != gameObject
+            && attacker.TryGetComponent(out CombatTextPresenter presenter))
+            presenter.Show(CombatTextUI.TextType.DAMAGE, fAppliedDamage, transform);
+
+        return fAppliedDamage;
+    }
+
+    public float Heal(float fAmount)
+    {
+        if (IsServer == false || fAmount <= 0f) return 0f;
+
+        float fCurrentHp = Get_Stat(STAT_TAG.HP);
+        float fAppliedHeal = Mathf.Min(fAmount, Get_Stat(STAT_TAG.MAX_HP) - fCurrentHp);
+        if (fAppliedHeal <= 0f) return 0f;
+
+        Set_Stat(STAT_TAG.HP, fCurrentHp + fAppliedHeal);
+        if (TryGetComponent(out CombatTextPresenter presenter))
+            presenter.Show(CombatTextUI.TextType.HEAL, fAppliedHeal, transform);
+
+        return fAppliedHeal;
+    }
+
+    public float RecoverMana(float fAmount, bool isTextVisible = true)
+    {
+        if (IsServer == false || fAmount <= 0f) return 0f;
+
+        float fCurrentMana = Get_Stat(STAT_TAG.MP);
+        float fRecoveredMana = Mathf.Min(fAmount, Get_Stat(STAT_TAG.MAX_MP) - fCurrentMana);
+        if (fRecoveredMana <= 0f) return 0f;
+
+        Set_Stat(STAT_TAG.MP, fCurrentMana + fRecoveredMana);
+        if (isTextVisible && TryGetComponent(out CombatTextPresenter presenter))
+            presenter.Show(CombatTextUI.TextType.MANA, fRecoveredMana, transform);
+
+        return fRecoveredMana;
+    }
     public void Set_Stat(STAT_TAG tag , float fValue)
     {
         if(IsServer == false) return;

@@ -7,7 +7,7 @@ public class MonsterHitState : EntityState
     private IEntityMovement _move;
     private EntityAnimator _aniController;
 
-    private const float _fReHitTime = 0.3f;   // 다음 경직으로 넘어가기까지의 최소 간격
+    private const float _fReHitTime = 0.6f;   // 다음 경직으로 넘어가기까지의 최소 간격
 
     public MonsterHitState(Entity entity)
     {
@@ -24,8 +24,6 @@ public class MonsterHitState : EntityState
     public override void Enter()
     {
         _aniController._state.Value = (ushort)MONSTER.StateType.HIT;
-        // 진입시킨 타격은 여기서 소비한다 — 남기면 곧바로 다음 경직으로 튕겨나간다
-        _damagable._isHit = false;
         // 뒤로 밀리는 피격 모션의 이동량은 클립이 직접 만든다
         _aniController._animator.applyRootMotion = true;
     }

@@ -21,6 +21,6 @@ public class AirborneOnCollision : ICollisionEventModule
         if (col.TryGetComponent(out CrowdController crowdController) == false) return;
 
         crowdController.Apply(CrowdController.CC_TAG.AIRBORNE,
-            new ICrowdControl.CCData(_skill.Data.fAirbornePower, _skill.Data.fAirborneDecay));
+            new ICrowdControl.CCData(_skill.Data.fAirbornePower, _skill.Data.fAirborneDecay), _skill.Owner.transform);
     }
 }

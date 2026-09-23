@@ -531,6 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc37229fd6318a43a4de76b5be4aa6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterDamage
+  _fInvulnerableDuration: 0.55
   _fHealthGift: 50
   _fManaGift: 50
 --- !u!1 &4369831013426504072

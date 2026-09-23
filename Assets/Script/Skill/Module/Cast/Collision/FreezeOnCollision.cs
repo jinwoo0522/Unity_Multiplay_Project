@@ -21,6 +21,6 @@ public class FreezeOnCollision : ICollisionEventModule
         if (col.TryGetComponent(out CrowdController crowdController) == false) return;
 
         crowdController.Apply(CrowdController.CC_TAG.FREEZE,
-            new ICrowdControl.CCData(_skill.Data.fFreezeTime));
+            new ICrowdControl.CCData(_skill.Data.fFreezeTime), _skill.Owner.transform);
     }
 }

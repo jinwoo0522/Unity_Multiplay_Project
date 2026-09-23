@@ -1,5 +1,3 @@
-using System;
-
 // 초당 마나 회복량을 시간에 비례해 적용하는 순수 C# 객체
 public class ManaRegenerator
 {
@@ -19,7 +17,6 @@ public class ManaRegenerator
 
         if(currentMana >= maxMana) return;
 
-        float recoveredMana = currentMana + _manaPerSecond * deltaTime;
-        _stat.Set_Stat(Stat.STAT_TAG.MP, Math.Min(recoveredMana, maxMana));
+        _stat.RecoverMana(_manaPerSecond * deltaTime, false);
     }
 }

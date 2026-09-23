@@ -513,6 +513,7 @@ GameObject:
   - component: {fileID: 3069796688563442396}
   - component: {fileID: 4870188770053609064}
   - component: {fileID: 675189881195598282}
+  - component: {fileID: 4480348212269762943}
   m_Layer: 7
   m_Name: Magicain_Player
   m_TagString: Player
@@ -883,6 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822786ba6ff2e745a17a4a71717a9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDamage
+  _fInvulnerableDuration: 0.55
 --- !u!114 &4870188770053609064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,6 +923,19 @@ MonoBehaviour:
     _slot: 0
   - _skillType: 2
     _slot: 1
+--- !u!114 &4480348212269762943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7576251448233022070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ad7fd94fafe1a40b05a83088fa64b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatTextPresenter
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &8304582804339889416
 GameObject:
   m_ObjectHideFlags: 0

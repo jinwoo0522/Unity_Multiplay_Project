@@ -5,17 +5,15 @@ public class CC_AirBorne : ICrowdControl
     public bool isFlag {get; private set;}
 
     CharacterController _cct;
-    IDamagable _damagable;
 
     float fVerticalVelocity;       // 상승 속도 (하강 중력은 외부에서 적용됨)
     float fDecay   = 3f;     // 상승력 지수 감쇠 — 띄울 때 확 올라갔다 점점 약해짐
     float fAcctime = 0f;
     const float fDelay = 0.3f;
 
-    public CC_AirBorne(CharacterController cct , IDamagable damagable)
+    public CC_AirBorne(CharacterController cct)
     {
         _cct = cct;
-        _damagable = damagable;
     }
 
     public void Apply(ICrowdControl.CCData data)
@@ -24,7 +22,6 @@ public class CC_AirBorne : ICrowdControl
         fVerticalVelocity = data._fValue;   // 상승 초기속도
         fDecay = data._fDecay;
         fAcctime = 0f;
-        _damagable._isHit = false;
     }
 
     public void Tick(float fTimeDelta)

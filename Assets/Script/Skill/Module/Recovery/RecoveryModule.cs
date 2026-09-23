@@ -20,9 +20,7 @@ public class RecoveryModule : ISkillModule
     {
         _skill.transform.position = _skill.Owner.transform.position;
 
-        float fCurrentHp = _stat.Get_Stat(Stat.STAT_TAG.HP);
-        float fMaxHp = _stat.Get_Stat(Stat.STAT_TAG.MAX_HP);
         float fHealAmount = _skill.Data.fHealAmountPerSecond * fTimeDelta;
-        _stat.Set_Stat(Stat.STAT_TAG.HP, Mathf.Min(fCurrentHp + fHealAmount, fMaxHp));
+        _stat.Heal(fHealAmount);
     }
 }

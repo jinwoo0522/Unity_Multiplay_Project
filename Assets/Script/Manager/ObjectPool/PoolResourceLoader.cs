@@ -170,5 +170,13 @@ public class PoolResourceLoader
             return;
         }
         prefabs.Add(elfQSkill);
+
+        GameObject combatText = Resources.Load<GameObject>("Prefabs/UI/CombatText");
+        if (combatText == null)
+        {
+            GameManager.Instance.DebugMessage<PoolResourceLoader>("CombatText 프리팹 NULL");
+            return;
+        }
+        prefabs.Add(combatText);
     }
 }

@@ -21,8 +21,8 @@ public class CrowdController : MonoBehaviour
         EntityEffector effector = GetComponent<EntityEffector>();
 
         CrowdControls.Add(CC_TAG.KNOCKBACK , new CC_Knockback(cct));
-        CrowdControls.Add(CC_TAG.AIRBORNE , new CC_AirBorne(cct , _damagable));
-        CrowdControls.Add(CC_TAG.FREEZE , new CC_Freeze(matChanger, effector, _damagable));
+        CrowdControls.Add(CC_TAG.AIRBORNE , new CC_AirBorne(cct));
+        CrowdControls.Add(CC_TAG.FREEZE , new CC_Freeze(matChanger, effector));
     }
 
     public void CrowdController_Update(float fTimeDelta)
@@ -48,10 +48,17 @@ public class CrowdController : MonoBehaviour
         return CrowdControls[tag].isFlag;
     }
 
-    public void Apply(CC_TAG tag , ICrowdControl.CCData data)
+    public void Apply(CC_TAG tag , ICrowdControl.CCData data, Transform attacker = null)
     {
         if(_damagable._isDead == true) return;
+        bool isFirstApply = CrowdControls[tag].isFlag == false;
         CrowdControls[tag].Apply(data);
+
+        if (isFirstApply && (tag == CC_TAG.FREEZE || tag == CC_TAG.AIRBORNE)
+            && attacker != null && attacker.gameObject != gameObject
+            && attacker.TryGetComponent(out CombatTextPresenter presenter))
+            presenter.Show(tag == CC_TAG.FREEZE ? CombatTextUI.TextType.FREEZE
+                : CombatTextUI.TextType.AIRBORNE, 0f, transform);
     }
     
     public void Restore(CC_TAG tag)
