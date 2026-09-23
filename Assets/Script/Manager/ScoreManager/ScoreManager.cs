@@ -41,6 +41,7 @@ public class ScoreManager
             Changed?.Invoke(killerId);
             Killed?.Invoke(killerId, victimId);
         }
+        
         if (_scores.TryGetValue(victimId, out ScoreData victim))
         {
             victim.deaths++;

@@ -22,5 +22,6 @@ MonoBehaviour:
   fGravity: -9.8
   fMaxMana: 150
   fManaRegen: 2.5
+  fDissolveDuration: 3.5
   fJumpAmount: 5
   fJumpDelay: 0.1

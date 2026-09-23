@@ -5,7 +5,7 @@ using UnityEngine;
 // 컨테이너는 참조로 넘겨받아 채운다(ref 불필요: 재할당이 아니라 Add만 하므로).
 public class PoolResourceLoader
 {
-    // 네트워크(스킬) 프리팹 로드 — enum 순서와 로드 순서를 일치시킨다
+    // 네트워크 프리팹 로드 — enum 순서와 로드 순서를 일치시킨다
     public void LoadNetworkPrefabs(List<GameObject> prefabs)
     {
         //0
@@ -64,6 +64,14 @@ public class PoolResourceLoader
             return;
         }
         prefabs.Add(elfQSkill);
+
+        GameObject goblin = Resources.Load<GameObject>("Prefabs/Monster/Goblin");
+        if (goblin == null)
+        {
+            GameManager.Instance.DebugMessage<PoolResourceLoader>("Goblin 몬스터 NULL");
+            return;
+        }
+        prefabs.Add(goblin);
     }
 
     // 로컬(이펙트) 프리팹 로드 — enum 순서와 로드 순서를 일치시킨다

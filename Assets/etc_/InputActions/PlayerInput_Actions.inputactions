@@ -197,8 +197,50 @@
         {
             "name": "UI",
             "id": "97dbf4a1-7577-48bc-8d44-5bb1c849b6b6",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "SpectateNext",
+                    "type": "Button",
+                    "id": "2dd06478-ec4a-4628-9c44-895fbccd1e75",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpectatePrevious",
+                    "type": "Button",
+                    "id": "77fa4674-f295-4dfa-91db-d9ccbd413da5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8d3d1865-a23a-45a1-b7b0-91f50a93e558",
+                    "path": "<Keyboard>/pageUp",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpectateNext",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76bf7954-de5c-47a5-845e-42563d3a2d28",
+                    "path": "<Keyboard>/pageDown",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpectatePrevious",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

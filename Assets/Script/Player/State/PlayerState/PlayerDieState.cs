@@ -10,9 +10,12 @@ public class PlayerDieState : EntityState
     private StateMachine _upperStateMachine;
     private CrowdController _crowdController;
     private MaterialChanger _matChanger;
+    private PlayerCamera _playerCamera;
+    private bool _isDissolveStarted;
 
     public PlayerDieState(Player player)
     {
+        _playerCamera = player.GetComponent<PlayerCamera>();
         _aniController = player._aniController;
         _move = player._move;
         _stateMachine = player._stateMachine;
@@ -30,11 +33,14 @@ public class PlayerDieState : EntityState
     {
         // 남아 있던 CC를 모두 해제한다 — 빙결 머티리얼·에어본 이동이 시체에 남지 않게
         _crowdController.RestoreAll();
+        _isDissolveStarted = false;
 
         _aniController._state.Value = (ushort)ENTITY.StateType.DIE;
 
         _upperStateMachine.Lock();
         _stateMachine.LockTransition();   // 입력·CC로 사망 상태를 빠져나가는 것만 막는다
+
+        
     }
 
     public override void Exit()
@@ -51,9 +57,11 @@ public class PlayerDieState : EntityState
     // 사망 모션이 끝까지 재생된 뒤부터 몸이 사라지기 시작한다
     private void CheckDissolve()
     {
-        if(_aniController.IsCurrentStateFinished() == false) return;
+        if(_isDissolveStarted == true || _aniController.IsCurrentStateFinished() == false) return;
 
+        _isDissolveStarted = true;
         _matChanger.Change(MaterialChanger.MAT_TAG.DISSOLVE);
 
+        _playerCamera.BeginSpectatingAfterDissolve();
     }
 }

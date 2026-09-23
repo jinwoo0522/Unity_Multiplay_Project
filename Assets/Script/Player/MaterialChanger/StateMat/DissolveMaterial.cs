@@ -8,13 +8,15 @@ public class DissolveMaterial : IStateMaterial
     private static readonly int _iHeightID = Shader.PropertyToID("_DissolveHeight");
 
     [SerializeField] private Material _sourceMat;                   // 프로젝트 원본 에셋 (직접 수정하지 않는다)
-    [SerializeField, Min(0.01f)] private float _fDuration = 1.5f;   // 0에서 1까지 도달하는 시간(초), 0이면 나눗셈이 깨져 하한을 둔다
+    private float _fDuration;
 
     private Material _instanceMat;
     private float _fHeight;
 
     public MaterialChanger.MAT_TAG Tag => MaterialChanger.MAT_TAG.DISSOLVE;
     public Material Material => _instanceMat;
+
+    public void SetDuration(float fDuration) => _fDuration = fDuration;
 
     public void Init()
     {

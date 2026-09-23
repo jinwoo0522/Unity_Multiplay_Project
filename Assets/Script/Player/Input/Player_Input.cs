@@ -7,7 +7,7 @@ public class Player_Input : NetworkBehaviour , IEntityMoveInput , IEntityInputSt
 {
     PlayerInput _inputAction;
     private InputCommand _input = new();
-    private Camera _mainCam;
+    private Camera _mainCamera;
 
     private readonly NetworkVariable<Vector3> _aimDir =
         new(Vector3.forward, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -21,9 +21,8 @@ public class Player_Input : NetworkBehaviour , IEntityMoveInput , IEntityInputSt
     {
         if(IsOwner == false) return;
 
-        _mainCam = GameManager.Instance.cameraManager.Get_Camera(CameraManager.CameraTag.MAIN);
-
         _inputAction = GetComponent<PlayerInput>();
+        _mainCamera = GameManager.Instance.cameraManager.Get_Camera(CameraManager.CameraTag.MAIN);
 
         _inputAction.actions["Player/Move"].performed += OnMovePerformed;
         _inputAction.actions["Player/Move"].canceled += OnMoveCanceled;
@@ -42,13 +41,39 @@ public class Player_Input : NetworkBehaviour , IEntityMoveInput , IEntityInputSt
 
         _inputAction.actions["Player/Q"].performed += OnQSkillPerformed;
         _inputAction.actions["Player/Q"].canceled += OnQSkillCanceled;
+
     }
+
+    public override void OnNetworkDespawn()
+    {
+        if(_inputAction == null) return;
+
+        _inputAction.actions["Player/Move"].performed -= OnMovePerformed;
+        _inputAction.actions["Player/Move"].canceled -= OnMoveCanceled;
+
+        _inputAction.actions["Player/Sprint"].performed -= OnSprintPerformed;
+        _inputAction.actions["Player/Sprint"].canceled -= OnSprintCanceled;
+
+        _inputAction.actions["Player/Jump"].performed -= OnJumpPerformed;
+        _inputAction.actions["Player/Jump"].canceled -= OnJumpCanceled;
+
+        _inputAction.actions["Player/Attack"].performed -= OnAttackPerformed;
+        _inputAction.actions["Player/Attack"].canceled -= OnAttackCanceled;
+
+        _inputAction.actions["Player/Attack_Skill"].performed -= OnAttack_SkillPerformed;
+        _inputAction.actions["Player/Attack_Skill"].canceled -= OnAttack_SkillCanceled;
+
+        _inputAction.actions["Player/Q"].performed -= OnQSkillPerformed;
+        _inputAction.actions["Player/Q"].canceled -= OnQSkillCanceled;
+
+    }
+
     // 조준 방향은 로컬 카메라(시네머신)에만 존재 → Owner가 서버로 동기화
     private void Update()
     {
         if(IsOwner == false) return;
 
-        _aimDir.Value = _mainCam.transform.forward;
+        _aimDir.Value = _mainCamera.transform.forward;
     }
 
     // Inpu처리는 클라에서 행하는 것이기 때문에 서버가 모름
@@ -127,7 +152,7 @@ public class Player_Input : NetworkBehaviour , IEntityMoveInput , IEntityInputSt
 
         SubFlag(ENTITY.InputFlagType.Q);
         SyncInputData_ServerRpc(_input);
-    }  
+    }
 
     void OnSprintPerformed(InputAction.CallbackContext ctx)
     {

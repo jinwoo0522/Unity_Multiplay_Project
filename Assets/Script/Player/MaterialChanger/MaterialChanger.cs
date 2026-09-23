@@ -18,13 +18,16 @@ public class MaterialChanger : NetworkBehaviour
     private IStateMaterial _currentMat;
     private bool _isChanged;
 
-    private SkinnedMeshRenderer[] _renderers;
+    private Renderer[] _renderers;
     private Material[][] _originMats;   // 렌더러별 원본 머티리얼 배열
 
     public override void OnNetworkSpawn()
     {
-        // 캐릭터가 여러 조각으로 나뉘어 있어 자식 렌더러를 전부 잡아야 한다 (골렘 5조각)
-        _renderers = GetComponentsInChildren<SkinnedMeshRenderer>(true);
+        // 몸·무기처럼 별도 메시로 구성된 파츠까지 상태 머티리얼을 적용한다
+        List<Renderer> renderers = new();
+        renderers.AddRange(GetComponentsInChildren<SkinnedMeshRenderer>(true));
+        renderers.AddRange(GetComponentsInChildren<MeshRenderer>(true));
+        _renderers = renderers.ToArray();
         _originMats = new Material[_renderers.Length][];
 
         for (int i = 0; i < _renderers.Length; ++i)
@@ -33,6 +36,9 @@ public class MaterialChanger : NetworkBehaviour
         // 머티리얼 인스턴스는 캐릭터마다 하나씩 만든다 — 공유 에셋을 건드리지 않아야 개별 연출이 가능하다
         for (int i = 0; i < _changeMats.Length; ++i)
         {
+            if (_changeMats[i] is DissolveMaterial dissolve)
+                dissolve.SetDuration(GetComponent<Stat>()._data.fDissolveDuration);
+
             _changeMats[i].Init();
             _matTable.Add(_changeMats[i].Tag, _changeMats[i]);
         }
@@ -41,6 +47,9 @@ public class MaterialChanger : NetworkBehaviour
     public override void OnNetworkDespawn()
     {
         _isChanged = false;
+
+        for (int i = 0; i < _renderers.Length; ++i)
+            _renderers[i].sharedMaterials = _originMats[i];
 
         for (int i = 0; i < _changeMats.Length; ++i)
             _changeMats[i].Release();

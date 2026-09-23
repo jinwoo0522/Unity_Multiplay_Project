@@ -20,4 +20,7 @@ public class Entity_Data : ScriptableObject
     [Header("마나")]
     public float fMaxMana   = 100f;
     public float fManaRegen = 2f;
+
+    [Header("사망 연출")]
+    [Min(0.01f)] public float fDissolveDuration = 3.5f;
 }
