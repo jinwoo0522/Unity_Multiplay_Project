@@ -6,21 +6,18 @@ public class CC_Freeze : ICrowdControl
 
     MaterialChanger _matChanger;
     EntityEffector _effector;
-    IDamagable _damagable;
     float fTime;
 
-    public CC_Freeze(MaterialChanger matChanger, EntityEffector effector, IDamagable damagable)
+    public CC_Freeze(MaterialChanger matChanger, EntityEffector effector)
     {
         _matChanger = matChanger;
         _effector = effector;
-        _damagable = damagable;
     }
 
     public void Apply(ICrowdControl.CCData data)
     {
         isFlag = true;
         fTime = data._fValue;
-        _damagable._isHit = false;
 
         _matChanger.Change(MaterialChanger.MAT_TAG.FROZEN);
         _effector.PlayPoolEffect(PoolObjectType.FROZEN_SMOKE_EFFECT);

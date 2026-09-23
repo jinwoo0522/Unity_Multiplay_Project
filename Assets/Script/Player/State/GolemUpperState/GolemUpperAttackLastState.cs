@@ -67,7 +67,7 @@ public class GolemUpperAttackLastState : EntityState
         if(hitInfo.Collider.TryGetComponent(out CrowdController crowdController)== true)
         {
             Vector3 vKnocbackDir = Vector3.Normalize(hitInfo.Point - _stat.gameObject.transform.position);
-            crowdController.Apply(CrowdController.CC_TAG.AIRBORNE , new ICrowdControl.CCData(fAirbornePower , fAirborneDecay));
+            crowdController.Apply(CrowdController.CC_TAG.AIRBORNE , new ICrowdControl.CCData(fAirbornePower , fAirborneDecay), _stat.transform);
             crowdController.Apply(CrowdController.CC_TAG.KNOCKBACK, new ICrowdControl.CCData(fKnockbackPower, fKnockbackDecay, vKnocbackDir));
         }
 

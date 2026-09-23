@@ -6,10 +6,12 @@ public class BattleUIManager : MonoBehaviour
 {
     [SerializeField] private PlayerHUD _playerHUD;
     [SerializeField] private SkillCooldownUI _skillCooldownUI;
+    [SerializeField] private CombatTextUI _combatTextUI;
 
     private NetworkObject _boundPlayer;
     private PlayerHUDBinder _hudBinder;
     private SkillCooldownUIBinder _skillCooldownBinder;
+    private CombatTextPresenter _combatTextPresenter;
     private Coroutine _trackRoutine;
 
     private void OnEnable()
@@ -54,8 +56,10 @@ public class BattleUIManager : MonoBehaviour
         _boundPlayer = player;
         _hudBinder = player.GetComponent<PlayerHUDBinder>();
         _skillCooldownBinder = player.GetComponent<SkillCooldownUIBinder>();
+        _combatTextPresenter = player.GetComponent<CombatTextPresenter>();
         _hudBinder.Bind(_playerHUD);
         _skillCooldownBinder.Bind(_skillCooldownUI);
+        _combatTextPresenter.Bind(_combatTextUI);
     }
 
     private void Unbind()
@@ -66,8 +70,12 @@ public class BattleUIManager : MonoBehaviour
         if (_skillCooldownBinder != null)
             _skillCooldownBinder.Unbind();
 
+        if (_combatTextPresenter != null)
+            _combatTextPresenter.Unbind();
+
         _hudBinder = null;
         _skillCooldownBinder = null;
+        _combatTextPresenter = null;
         _boundPlayer = null;
     }
 }

@@ -36,9 +36,7 @@ public class MonsterDamage : EntityDamage
         if(player == null || player._damagable._isDead == true) return;
 
         Stat playerStat = player._stat;
-        playerStat.Set_Stat(Stat.STAT_TAG.HP,
-            Mathf.Min(playerStat.Get_Stat(Stat.STAT_TAG.HP) + _fHealthGift, playerStat.Get_Stat(Stat.STAT_TAG.MAX_HP)));
-        playerStat.Set_Stat(Stat.STAT_TAG.MP,
-            Mathf.Min(playerStat.Get_Stat(Stat.STAT_TAG.MP) + _fManaGift, playerStat.Get_Stat(Stat.STAT_TAG.MAX_MP)));
+        playerStat.Heal(_fHealthGift);
+        playerStat.RecoverMana(_fManaGift);
     }
 }

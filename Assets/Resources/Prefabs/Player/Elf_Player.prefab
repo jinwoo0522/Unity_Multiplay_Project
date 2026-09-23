@@ -2122,6 +2122,7 @@ GameObject:
   - component: {fileID: 2510972819616107634}
   - component: {fileID: 4738739508769453788}
   - component: {fileID: 2493096789575012800}
+  - component: {fileID: 6208930255627485701}
   m_Layer: 7
   m_Name: Elf_Player
   m_TagString: Player
@@ -2530,6 +2531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822786ba6ff2e745a17a4a71717a9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDamage
+  _fInvulnerableDuration: 0.55
 --- !u!114 &4738739508769453788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2566,6 +2568,19 @@ MonoBehaviour:
     _slot: 0
   - _skillType: 5
     _slot: 1
+--- !u!114 &6208930255627485701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3448056407326184070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ad7fd94fafe1a40b05a83088fa64b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatTextPresenter
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &3648312818719334364
 GameObject:
   m_ObjectHideFlags: 0

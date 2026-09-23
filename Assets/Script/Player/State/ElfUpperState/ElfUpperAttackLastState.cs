@@ -63,6 +63,6 @@ public class ElfUpperAttackLastState : EntityState
         _effector.PlayEffect((int)ELF.ElfEffect.HIT_EFFECT , hitInfo.Point);
 
         if(hitInfo.Collider.TryGetComponent(out CrowdController crowdController)== true)
-            crowdController.Apply(CrowdController.CC_TAG.AIRBORNE , new ICrowdControl.CCData(fAirbornePower , fAirborneDecay));
+            crowdController.Apply(CrowdController.CC_TAG.AIRBORNE , new ICrowdControl.CCData(fAirbornePower , fAirborneDecay), _stat.transform);
     }
 }
