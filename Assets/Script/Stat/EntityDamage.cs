@@ -26,6 +26,8 @@ public abstract class EntityDamage : MonoBehaviour , IDamagable
 
     public void Hit(IDamagable.DamageInfo damageInfo)
     {
+        if(_isDead == true) return;
+
         // 피격 반응이 읽어야 하므로 데미지 적용보다 먼저 보관한다
         _damageInfo = damageInfo;
 
@@ -48,7 +50,7 @@ public abstract class EntityDamage : MonoBehaviour , IDamagable
     {
         if(tag != Stat.STAT_TAG.HP) return;
 
-        bool isDead = _stat.Get_Stat(Stat.STAT_TAG.HP) < 0f;
+        bool isDead = _stat.Get_Stat(Stat.STAT_TAG.HP) <= 0f;
 
         bool isJustDied = _isDead == false && isDead == true;
         _isDead = isDead;
@@ -63,5 +65,12 @@ public abstract class EntityDamage : MonoBehaviour , IDamagable
 
     protected virtual void OnDeath()
     {
+    }
+
+    private void OnDisable()
+    {
+        _isHit = false;
+        _isDead = false;
+        _damageInfo = default;
     }
 }

@@ -6,6 +6,9 @@ public class PooledHandler : IPoolReturner
 {
     private readonly ObjectPool<IPoolable> _pool;
     private readonly GameObject _prefab;   // IPoolable을 구현한 Component 프리팹
+    private bool _hasSpawnPose;
+    private Vector3 _vSpawnPosition;
+    private Quaternion _qSpawnRotation;
 
     public PooledHandler(GameObject prefab, int iMinSize, int iMaxSize)
     {
@@ -22,17 +25,41 @@ public class PooledHandler : IPoolReturner
 
     private IPoolable Create()
     {
-        GameObject obj = Object.Instantiate(_prefab);
+        GameObject obj = _hasSpawnPose
+            ? Object.Instantiate(_prefab, _vSpawnPosition, _qSpawnRotation)
+            : Object.Instantiate(_prefab);
         IPoolable poolable = obj.GetComponent<IPoolable>();   // 생성한 인스턴스에서 IPoolable 획득
         poolable.Handler = this;               // 스스로 반납할 수 있도록 핸들러 주입
         return poolable;
     }
 
-    private void OnGet(IPoolable obj)     => obj.Active();
+    private void OnGet(IPoolable obj)
+    {
+        if (_hasSpawnPose)
+            ((Component)obj).transform.SetPositionAndRotation(_vSpawnPosition, _qSpawnRotation);
+
+        obj.Active();
+    }
     private void OnReturn(IPoolable obj)  => obj.Release();
     private void OnDestroy(IPoolable obj) => obj.Destroy();
 
     public IPoolable Get() => _pool.Get();
+
+    public IPoolable Get(Vector3 vPosition, Quaternion qRotation)
+    {
+        _vSpawnPosition = vPosition;
+        _qSpawnRotation = qRotation;
+        _hasSpawnPose = true;
+
+        try
+        {
+            return _pool.Get();
+        }
+        finally
+        {
+            _hasSpawnPose = false;
+        }
+    }
 
     // IPoolReturner — 풀링 대상이 스스로를 반납
     public void Return(object obj) => _pool.Release((IPoolable)obj);

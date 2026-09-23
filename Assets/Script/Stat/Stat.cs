@@ -29,23 +29,24 @@ public class Stat : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        // 모든 클라가 변경을 받도록 구독 (NetworkList는 서버 쓰기 → 전 클라 통지)
+        if(IsServer == true)
+        {
+            for(int i = StatList.Count ; i < (int)STAT_TAG.END ; i++)
+                StatList.Add(0f);
+
+            StatList[(int)STAT_TAG.HP] = Stat_Data.fMaxHp;
+            StatList[(int)STAT_TAG.MAX_HP] = Stat_Data.fMaxHp;
+            StatList[(int)STAT_TAG.MP] = Stat_Data.fMaxMana;
+            StatList[(int)STAT_TAG.MAX_MP] = Stat_Data.fMaxMana;
+            StatList[(int)STAT_TAG.DAMAGE] = Stat_Data.fAttackDamage;
+            StatList[(int)STAT_TAG.WALK_SPEED] = Stat_Data.fWalkSpeed;
+            StatList[(int)STAT_TAG.RUN_SPEED] = Stat_Data.fRunSpeed;
+
+            _manaRegenerator = new ManaRegenerator(this, Stat_Data.fManaRegen);
+        }
+
+        // 초기값 설정이 끝난 뒤 변경 이벤트를 구독한다.
         StatList.OnListChanged += HandleListChanged;
-
-        if(IsServer == false) return;
-
-        for(int i = 0 ; i < (int)STAT_TAG.END ; i++)
-            StatList.Add(0f);
-
-        StatList[(int)STAT_TAG.HP] = Stat_Data.fMaxHp;
-        StatList[(int)STAT_TAG.MAX_HP] = Stat_Data.fMaxHp;
-        StatList[(int)STAT_TAG.MP] = Stat_Data.fMaxMana;
-        StatList[(int)STAT_TAG.MAX_MP] = Stat_Data.fMaxMana;
-        StatList[(int)STAT_TAG.DAMAGE] = Stat_Data.fAttackDamage;
-        StatList[(int)STAT_TAG.WALK_SPEED] = Stat_Data.fWalkSpeed;
-        StatList[(int)STAT_TAG.RUN_SPEED] = Stat_Data.fRunSpeed;
-
-        _manaRegenerator = new ManaRegenerator(this, Stat_Data.fManaRegen);
     }
 
     private void Update()

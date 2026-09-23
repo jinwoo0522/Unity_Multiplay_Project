@@ -18,8 +18,10 @@ MonoBehaviour:
   fMaxHp: 100
   fWalkSpeed: 2
   fRunSpeed: 4
+  fRotateSpeed: 10
+  fGravity: -9.8
   fMaxMana: 100
   fManaRegen: 0.5
+  fDissolveDuration: 3.5
   fJumpAmount: 5
-  fGravity: -9.8
   fJumpDelay: 0.1

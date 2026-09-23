@@ -36,6 +36,9 @@ public class MaterialChanger : NetworkBehaviour
         // 머티리얼 인스턴스는 캐릭터마다 하나씩 만든다 — 공유 에셋을 건드리지 않아야 개별 연출이 가능하다
         for (int i = 0; i < _changeMats.Length; ++i)
         {
+            if (_changeMats[i] is DissolveMaterial dissolve)
+                dissolve.SetDuration(GetComponent<Stat>()._data.fDissolveDuration);
+
             _changeMats[i].Init();
             _matTable.Add(_changeMats[i].Tag, _changeMats[i]);
         }
@@ -44,6 +47,9 @@ public class MaterialChanger : NetworkBehaviour
     public override void OnNetworkDespawn()
     {
         _isChanged = false;
+
+        for (int i = 0; i < _renderers.Length; ++i)
+            _renderers[i].sharedMaterials = _originMats[i];
 
         for (int i = 0; i < _changeMats.Length; ++i)
             _changeMats[i].Release();

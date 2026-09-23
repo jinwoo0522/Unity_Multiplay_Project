@@ -1,4 +1,4 @@
-// 스킬 종류 — 풀링/발사 시 enum 값으로 스킬을 지정
+// 네트워크 풀 대상 종류
 public enum NetworkObjectType
 {
     ELECTRONIC_SKILL,
@@ -7,6 +7,7 @@ public enum NetworkObjectType
     FIRE_EXPLOSION,
     FIRE_BUFF,
     ELF_MOUSE_SKILL,
-    ELF_Q_SKILL
+    ELF_Q_SKILL,
+    GOBLIN
 }
 

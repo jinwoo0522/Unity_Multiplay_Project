@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// 스킬(네트워크)과 이펙트(클라 로컬)를 각각의 enum 키로 풀링 관리하는 매니저.
+// 네트워크 오브젝트와 이펙트(클라 로컬)를 각각의 enum 키로 풀링 관리하는 매니저.
 // 네트워크 풀과 로컬 풀을 컨테이너부터 분리한다.
 public class ObjectPoolManager
 {
@@ -11,7 +11,7 @@ public class ObjectPoolManager
     private List<GameObject> _Prefabs = new List<GameObject>();
 
     // 네트워크 풀 — NGO 어댑터 보유
-    private Dictionary<NetworkObjectType, NetworkPoolHandler> _skillPools = new();
+    private Dictionary<NetworkObjectType, NetworkPoolHandler> _networkPools = new();
     // 로컬 풀 — 순수 IPoolable 풀
     private Dictionary<PoolObjectType, PooledHandler> _effectPools = new();
 
@@ -38,7 +38,12 @@ public class ObjectPoolManager
     // 네트워크 풀 — 스킬을 제네릭 타입으로 획득 (직접 Get은 NGO 스폰 우회)
     public T Get<T>(NetworkObjectType type) where T : Component, IPoolable
     {
-        return (T)_skillPools[type].Get();
+        return (T)_networkPools[type].Get();
+    }
+
+    public T Get<T>(NetworkObjectType type, Vector3 vPosition, Quaternion qRotation) where T : Component, IPoolable
+    {
+        return (T)_networkPools[type].Get(vPosition, qRotation);
     }
 
     private void Init()
@@ -46,11 +51,11 @@ public class ObjectPoolManager
         _loader.LoadNetworkPrefabs(_NetworkPrefabs);
         _loader.LoadLocalPrefabs(_Prefabs);
 
-        // 네트워크 풀 — 로드된 스킬마다 NGO 어댑터 생성 및 등록
+        // 네트워크 풀 — 로드된 프리팹마다 NGO 어댑터 생성 및 등록
         for (int i = 0; i < _NetworkPrefabs.Count; ++i)
         {
             NetworkPoolHandler handler = new NetworkPoolHandler(_NetworkPrefabs[i], _iMinSize, _iMaxSize);
-            _skillPools.Add((NetworkObjectType)i, handler);
+            _networkPools.Add((NetworkObjectType)i, handler);
 
             NetworkManager.Singleton.PrefabHandler.
                 AddHandler(_NetworkPrefabs[i], handler);
@@ -69,8 +74,8 @@ public class ObjectPoolManager
 
     private void PreCreate(int iCount)
     {
-        foreach (var skillpool in _skillPools)
-            skillpool.Value.Prewarm(iCount);
+        foreach (var networkPool in _networkPools)
+            networkPool.Value.Prewarm(iCount);
 
         foreach (var effectpool in _effectPools)
             effectpool.Value.Prewarm(iCount);

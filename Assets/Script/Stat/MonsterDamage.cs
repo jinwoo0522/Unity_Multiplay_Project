@@ -3,6 +3,16 @@ using UnityEngine;
 // 몬스터 피격 반응 — 상·하체 분리가 없어 경직이 전신을 멈춘다
 public class MonsterDamage : EntityDamage
 {
+    [SerializeField] private float _fHealthGift = 50f;
+    [SerializeField] private float _fManaGift = 50f;
+    protected override void OnDeath()
+    {
+        if(_damageInfo.Attacker == null) return;
+
+        Gift();
+
+    }
+
     protected override void OnHit(IDamagable.DamageInfo damageInfo)
     {
         LookAtAttacker(damageInfo.Attacker);
@@ -18,5 +28,17 @@ public class MonsterDamage : EntityDamage
         if(vFlat.sqrMagnitude < 0.0001f) return;
 
         transform.rotation = Quaternion.LookRotation(vFlat);
+    }
+
+    private void Gift()
+    {
+        Player player = _damageInfo.Attacker.GetComponent<Player>();
+        if(player == null || player._damagable._isDead == true) return;
+
+        Stat playerStat = player._stat;
+        playerStat.Set_Stat(Stat.STAT_TAG.HP,
+            Mathf.Min(playerStat.Get_Stat(Stat.STAT_TAG.HP) + _fHealthGift, playerStat.Get_Stat(Stat.STAT_TAG.MAX_HP)));
+        playerStat.Set_Stat(Stat.STAT_TAG.MP,
+            Mathf.Min(playerStat.Get_Stat(Stat.STAT_TAG.MP) + _fManaGift, playerStat.Get_Stat(Stat.STAT_TAG.MAX_MP)));
     }
 }

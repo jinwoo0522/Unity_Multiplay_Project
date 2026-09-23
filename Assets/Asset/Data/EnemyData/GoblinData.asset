@@ -22,5 +22,6 @@ MonoBehaviour:
   fGravity: -9.8
   fMaxMana: 100
   fManaRegen: 2
+  fDissolveDuration: 2.5
   fDetectRange: 6
   fReturnDistance: 10

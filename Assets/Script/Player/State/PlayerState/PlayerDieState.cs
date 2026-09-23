@@ -10,10 +10,12 @@ public class PlayerDieState : EntityState
     private StateMachine _upperStateMachine;
     private CrowdController _crowdController;
     private MaterialChanger _matChanger;
+    private PlayerCamera _playerCamera;
     private bool _isDissolveStarted;
 
     public PlayerDieState(Player player)
     {
+        _playerCamera = player.GetComponent<PlayerCamera>();
         _aniController = player._aniController;
         _move = player._move;
         _stateMachine = player._stateMachine;
@@ -37,6 +39,8 @@ public class PlayerDieState : EntityState
 
         _upperStateMachine.Lock();
         _stateMachine.LockTransition();   // 입력·CC로 사망 상태를 빠져나가는 것만 막는다
+
+        
     }
 
     public override void Exit()
@@ -57,5 +61,7 @@ public class PlayerDieState : EntityState
 
         _isDissolveStarted = true;
         _matChanger.Change(MaterialChanger.MAT_TAG.DISSOLVE);
+
+        _playerCamera.BeginSpectatingAfterDissolve();
     }
 }
