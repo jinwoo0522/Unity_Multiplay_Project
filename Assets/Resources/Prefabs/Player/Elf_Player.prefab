@@ -175,7 +175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4620147078737463234}
   - component: {fileID: 1785934303369070337}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: RIGMahiaRLeg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2047,7 +2047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6205148743197953472}
   - component: {fileID: 1356318869531512202}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: RIGMahiaLLeg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2295,7 +2295,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2.4
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 50
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -2400,6 +2400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   ShowTopMostFoldoutHeaderGroup: 1
+  _fPlayerSeparationSpeed: 2
   playerData: {fileID: 11400000, guid: 544554fc9e492e14ea81ccb605682e48, type: 2}
 --- !u!114 &4768658993644480280
 MonoBehaviour:
@@ -2777,7 +2778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7683381691549117821}
   - component: {fileID: 2099599819921442458}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: RIGMahiaLArm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3635,7 +3636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3873690999202632518}
   - component: {fileID: 2647981437997666101}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: RIGMahiaRLeg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4160,7 +4161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3803821443327885532}
   - component: {fileID: 6175590418277193520}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: RIGMahiaSpineChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4370,7 +4371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5132196953627558366}
   - component: {fileID: 6537036263878600309}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: RIGMahiaSpineBelly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4461,7 +4462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6467010527595146751}
   - component: {fileID: 4122870333024567482}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: RIGMahiaRArm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4549,7 +4550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8033780097755897083}
   - component: {fileID: 2583819081521298515}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: RIGMahiaSpineAbs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4854,7 +4855,7 @@ GameObject:
   m_Component:
   - component: {fileID: 516862454717555642}
   - component: {fileID: 4077305419916675003}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: RIGMahiaLLeg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5291,7 +5292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7167434664808846035}
   - component: {fileID: 6190196600254146443}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: RIGMahiaHub002
   m_TagString: Untagged
   m_Icon: {fileID: 0}

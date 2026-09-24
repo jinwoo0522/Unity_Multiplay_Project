@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour ,IJumpMovement, IEntityMovement
 {   
+    [SerializeField] private float _fPlayerSeparationSpeed = 4f;
+
     [SerializeField]
     private Player_Data playerData;
     private CharacterController               _cct;
+    private Animator                          _animator;
     private Stat                              _stat;
+    private Vector3                           _vCharacterPushDirection;
 
 
     private float                   verticalVelocity = 0f;
@@ -17,6 +21,7 @@ public class PlayerMovement : NetworkBehaviour ,IJumpMovement, IEntityMovement
     {
         // 이 객체들은 서버에서도 갱신 되어야 하기 때문에 실행해야함
         _cct         = GetComponent<CharacterController>();
+        _animator    = GetComponent<Animator>();
         _stat       = GetComponent<Stat>();
 
         if(IsOwner == false)
@@ -42,14 +47,23 @@ public class PlayerMovement : NetworkBehaviour ,IJumpMovement, IEntityMovement
 
     public void Gravity()
     {
-        if (_cct.isGrounded && verticalVelocity < 0f)
+        if (_animator.applyRootMotion)
+            return;
+
+        ApplyGravity(_cct.isGrounded);
+    }
+
+    private void ApplyGravity(bool isGrounded)
+    {
+        if (isGrounded && verticalVelocity < 0f)
             verticalVelocity = -2f; // 바닥 감지를 위한 최소 하강값
-        else if (!_cct.isGrounded)
+        else if (!isGrounded)
             verticalVelocity += playerData.fGravity * Time.deltaTime;
 
         Vector3 vGravity= Vector3.zero;
 
         vGravity.y = verticalVelocity;
+        PushAwayFromCharacter();
         _cct.Move(vGravity * Time.deltaTime);
     }
 
@@ -80,5 +94,45 @@ public class PlayerMovement : NetworkBehaviour ,IJumpMovement, IEntityMovement
 
             yield return null;
         }
+    }
+
+    private void OnAnimatorMove()
+    {
+        if (!IsServer || !_animator.applyRootMotion)
+            return;
+
+        bool isGrounded = _cct.isGrounded;
+        _cct.transform.rotation *= _animator.deltaRotation;
+        _cct.Move(_animator.deltaPosition);
+        ApplyGravity(isGrounded);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (!IsServer || hit.collider is not CharacterController otherCharacter ||
+            otherCharacter.GetComponent<Entity>() == null)
+            return;
+
+        Vector3 vAway = transform.position - otherCharacter.transform.position;
+        vAway.y = 0f;
+        if (vAway.sqrMagnitude <= Mathf.Epsilon)
+        {
+            vAway = hit.normal;
+            vAway.y = 0f;
+        }
+
+        _vCharacterPushDirection = vAway.sqrMagnitude > Mathf.Epsilon
+            ? vAway.normalized
+            : transform.forward;
+    }
+
+    private void PushAwayFromCharacter()
+    {
+        if (_vCharacterPushDirection == Vector3.zero)
+            return;
+
+        Vector3 vPush = _vCharacterPushDirection;
+        _vCharacterPushDirection = Vector3.zero;
+        _cct.Move(vPush * _fPlayerSeparationSpeed * Time.deltaTime);
     }
 }

@@ -8,11 +8,13 @@ public class MonsterMove : MonoBehaviour, IEntityMovement
     [SerializeField] private Stat _stat;
     [SerializeField] private Monster _goblin;   // 타게터 소유자 — 타겟은 매 프레임 바뀌므로 참조만 캐싱한다
     [SerializeField] private NavMeshAgent _agent;
+    private Animator _animator;
     private float _fVerticalVelocity = 0f;
 
-    void Awake()
+    private void Awake()
     {
         _agent.updatePosition = false;
+        _animator = GetComponent<Animator>();
     }
 
 
@@ -42,13 +44,20 @@ public class MonsterMove : MonoBehaviour, IEntityMovement
 
     public void Gravity()
     {
-        if (_cct.isGrounded && _fVerticalVelocity < 0f)
+        if (_animator.applyRootMotion)
+            return;
+
+        ApplyGravity(_cct.isGrounded);
+    }
+
+    private void ApplyGravity(bool isGrounded)
+    {
+        if (isGrounded && _fVerticalVelocity < 0f)
             _fVerticalVelocity = -2f;   // 바닥 감지를 위한 최소 하강값
-        else if (!_cct.isGrounded)
+        else if (!isGrounded)
             _fVerticalVelocity += _stat._data.fGravity * Time.deltaTime;
 
         Vector3 vGravity = Vector3.zero;
-
         vGravity.y = _fVerticalVelocity;
         _cct.Move(vGravity * Time.deltaTime);
     }
@@ -56,5 +65,16 @@ public class MonsterMove : MonoBehaviour, IEntityMovement
     // 몬스터는 대시를 사용하지 않는다 — 인터페이스 구현만 채운다
     public void Dash(float fDashSpeed, float fDashDistance)
     {
+    }
+
+    private void OnAnimatorMove()
+    {
+        if (!_goblin.IsServer || !_animator.applyRootMotion)
+            return;
+
+        bool isGrounded = _cct.isGrounded;
+        _cct.transform.rotation *= _animator.deltaRotation;
+        _cct.Move(_animator.deltaPosition);
+        ApplyGravity(isGrounded);
     }
 }

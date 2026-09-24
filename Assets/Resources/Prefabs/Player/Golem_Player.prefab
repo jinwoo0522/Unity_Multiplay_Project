@@ -536,7 +536,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2.2
   m_Radius: 1
-  m_SlopeLimit: 45
+  m_SlopeLimit: 50
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -614,6 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   ShowTopMostFoldoutHeaderGroup: 1
+  _fPlayerSeparationSpeed: 2
   playerData: {fileID: 11400000, guid: 7859729af18cf0643b19b95b32aca4cc, type: 2}
 --- !u!114 &1000000000000005
 MonoBehaviour:
