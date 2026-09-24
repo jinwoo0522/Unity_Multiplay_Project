@@ -9,9 +9,6 @@ public class UserScrollbar : NetworkBehaviour
     private Button StartBtn;
     [SerializeField]
     private GameObject UserCountText;
-    [SerializeField]
-    string SceneName;
-
     public GameObject TextPrefeb;
     private TextMeshProUGUI UserCountUI;
     private ScrollRect scrollRect;
@@ -45,7 +42,7 @@ public class UserScrollbar : NetworkBehaviour
         StartBtn.onClick.AddListener(()
             =>
         {
-            NetworkManager.Singleton.SceneManager.LoadScene(SceneName , 
+            NetworkManager.Singleton.SceneManager.LoadScene(SessionManager.GameSceneName,
             UnityEngine.SceneManagement.LoadSceneMode.Single);
             
             NetworkManager.Singleton.OnConnectionEvent -= AddUser;
@@ -53,16 +50,23 @@ public class UserScrollbar : NetworkBehaviour
 
         net_uiCount.OnValueChanged += (int pre , int next) =>
         {
-             UserCountUI.text = $"{net_uiCount.Value} / 10";
+             UserCountUI.text = $"{net_uiCount.Value} / {SessionManager.MaxPlayers}";
         };
 
         if(IsServer)
             net_uiCount.Value = NetworkManager.Singleton.ConnectedClientsList.Count;
 
+        UserCountUI.text = $"{net_uiCount.Value} / {SessionManager.MaxPlayers}";
+
     }
+    public override void OnNetworkDespawn()
+    {
+        NetworkManager.Singleton.OnConnectionEvent -= AddUser;
+    }
+
     public void AddUser(NetworkManager nm, ConnectionEventData data)
     {
-        if(IsHost == true && net_uiCount.Value >= 1)
+        if(IsHost == true && !SessionManager.Instance.IsAutomaticMatch && net_uiCount.Value >= 1)
         {
             StartBtn.gameObject.SetActive(true);
         }

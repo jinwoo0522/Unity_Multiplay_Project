@@ -2,8 +2,9 @@ using UnityEngine;
 public class MonsterTargeter
 {
     private Transform _transform;
+    private Transform _target;
     private IDamagable _targetDamagable;   // 매 프레임 GetComponent를 피하려 탐색 시점에 캐싱
-    public Transform Target {get; private set;}   // 사거리 안에 대상이 없으면 null
+    public Transform Target => _targetDamagable != null && !_targetDamagable._isDead ? _target : null;
 
     public MonsterTargeter(Transform transform)
     {
@@ -18,12 +19,12 @@ public class MonsterTargeter
 
         if(entity == null)
         {
-            Target = null;
+            _target = null;
             _targetDamagable = null;
             return;
         }
 
-        Target = entity.transform;
+        _target = entity.transform;
         _targetDamagable = entity._damagable;
     }
 
@@ -31,16 +32,19 @@ public class MonsterTargeter
     // 재탐색은 하지 않는다. 비워두면 상태가 대기로 돌아가고 거기서 다시 탐색한다
     public void KeepTarget(float fLeaveRange)
     {
-        if(IsInRange(fLeaveRange) == true && _targetDamagable._isDead == false) return;
+        if(IsInRange(fLeaveRange) == true) return;
 
-        Target = null;
+        _target = null;
         _targetDamagable = null;
     }
 
     // 타겟이 주어진 거리 안에 있는지 — 추격 유지·공격 진입 판정이 함께 쓴다
     public bool IsInRange(float fRange)
     {
-        float fSqr = (Target.position - _transform.position).sqrMagnitude;
+        Transform target = Target;
+        if(target == null) return false;
+
+        float fSqr = (target.position - _transform.position).sqrMagnitude;
 
         return fSqr <= fRange * fRange;
     }

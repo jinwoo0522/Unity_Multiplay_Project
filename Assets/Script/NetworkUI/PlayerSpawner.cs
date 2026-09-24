@@ -16,9 +16,13 @@ public class PlayerSpawner : NetworkBehaviour
     [FormerlySerializedAs("SpawnPoints")]
     [SerializeField] private Transform[] _spawnPoints;
 
-    public void RequestSpawnPlayer(PLAYER_INDEX characterIndex)
+    public bool RequestSpawnPlayer(PLAYER_INDEX characterIndex)
     {
+        if (NetworkManager.Singleton == null || !NetworkManager.Singleton.IsListening || !IsSpawned)
+            return false;
+
         RequestSpawnPlayerServerRpc(characterIndex);
+        return true;
     }
 
     private void ChoicePlayer(ulong clientID, PLAYER_INDEX index)

@@ -17,7 +17,7 @@ public class PlayerSelectPresenter : MonoBehaviour
 
     private void OnPlayerSelected(PLAYER_INDEX characterIndex)
     {
-        _playerSpawner.RequestSpawnPlayer(characterIndex);
-        _view.ShowGameUI();
+        if (_playerSpawner.RequestSpawnPlayer(characterIndex))
+            _view.ShowGameUI();
     }
 }

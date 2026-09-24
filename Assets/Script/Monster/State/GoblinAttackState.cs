@@ -12,6 +12,7 @@ public class GoblinAttackState : EntityState
     private IHitter _hitter;
     private Stat _stat;
     private IEffector _effector;
+    private float _fDetectRange;
     Vector3 vCentor = new Vector3(0f,1f,1.5f);
     Vector3 vHalfExtents = new Vector3(1.2f,0.5f,0.7f);
     const float fHitDuration = 0.3f;   // 판정 지속시간
@@ -27,6 +28,7 @@ public class GoblinAttackState : EntityState
         _hitter = goblin._hitter;
         _stat = goblin._stat;   
         _effector = goblin._effector;
+        _fDetectRange = goblin._enemyData.fDetectRange;
     }
 
     public override void Create()
@@ -39,6 +41,7 @@ public class GoblinAttackState : EntityState
     public override void Enter()
     {
         _aniController._state.Value = (ushort)ENTITY.StateType.ATTACK;
+        _agent.ResetPath();
         // 앞으로 내딛는 이동량은 클립이 직접 만든다
         _aniController._animator.applyRootMotion = true;
         _effector.PlayTrail((int)MONSTER.GoblinTrail.WEAPON_TRAIL);
@@ -53,6 +56,9 @@ public class GoblinAttackState : EntityState
 
     protected override void UpdateState(float fTimedelta, ushort curState)
     {
+        if(_targeter.Target == null)
+            _targeter.Search(_fDetectRange);
+
         if(_targeter.Target != null)
         {
             Vector3 vDirection = _targeter.Target.position - _transform.position;
@@ -70,6 +76,7 @@ public class GoblinAttackState : EntityState
     }
     void EventFunc()
     {
+        if(_targeter.Target == null) return;
         _hitter.DoHitCheck(vCentor , vHalfExtents , fHitDuration, HitHandler);
     }
 
