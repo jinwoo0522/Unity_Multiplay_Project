@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDieState : EntityState
 {
     private EntityAnimator _aniController;
+    private IDamagable _damagable;
     private IEntityMovement _move;
     private StateMachine _stateMachine;
     private StateMachine _upperStateMachine;
@@ -17,6 +18,7 @@ public class PlayerDieState : EntityState
     {
         _playerCamera = player.GetComponent<PlayerCamera>();
         _aniController = player._aniController;
+        _damagable = player._damagable;
         _move = player._move;
         _stateMachine = player._stateMachine;
         _upperStateMachine = player._upperStateMachine;
@@ -31,6 +33,7 @@ public class PlayerDieState : EntityState
 
     public override void Enter()
     {
+        _damagable._isDead = true;
         // 남아 있던 CC를 모두 해제한다 — 빙결 머티리얼·에어본 이동이 시체에 남지 않게
         _crowdController.RestoreAll();
         _isDissolveStarted = false;
