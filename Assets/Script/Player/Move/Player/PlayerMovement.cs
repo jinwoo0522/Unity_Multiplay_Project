@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour ,IJumpMovement, IEntityMovement
 {   
-    [SerializeField] private float _fPlayerSeparationSpeed = 2f;
-
     [SerializeField]
     private Player_Data playerData;
     private CharacterController               _cct;
     private Stat                              _stat;
-    private CharacterController               _otherPlayer;
-    private Vector3                           _vSeparationDirection;
-
-    private const float fSeparationMargin = 0.05f;
 
 
     private float                   verticalVelocity = 0f;
@@ -56,7 +50,6 @@ public class PlayerMovement : NetworkBehaviour ,IJumpMovement, IEntityMovement
         Vector3 vGravity= Vector3.zero;
 
         vGravity.y = verticalVelocity;
-        SeparateFromPlayer();
         _cct.Move(vGravity * Time.deltaTime);
     }
 
@@ -87,47 +80,5 @@ public class PlayerMovement : NetworkBehaviour ,IJumpMovement, IEntityMovement
 
             yield return null;
         }
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (!IsServer || hit.collider is not CharacterController otherPlayer ||
-            otherPlayer.GetComponent<PlayerMovement>() == null)
-            return;
-
-        _otherPlayer = otherPlayer;
-        _vSeparationDirection = hit.normal;
-        _vSeparationDirection.y = 0f;
-    }
-
-    private void SeparateFromPlayer()
-    {
-        if (_otherPlayer == null)
-            return;
-
-        Bounds ownBounds = _cct.bounds;
-        Bounds otherBounds = _otherPlayer.bounds;
-        if (ownBounds.min.y > otherBounds.max.y + fSeparationMargin ||
-            ownBounds.max.y < otherBounds.min.y - fSeparationMargin)
-        {
-            _otherPlayer = null;
-            return;
-        }
-
-        Vector3 vAway = transform.position - _otherPlayer.transform.position;
-        vAway.y = 0f;
-        float fRequiredDistance = _cct.radius + _otherPlayer.radius + fSeparationMargin;
-        if (vAway.sqrMagnitude >= fRequiredDistance * fRequiredDistance)
-        {
-            _otherPlayer = null;
-            return;
-        }
-
-        if (vAway.sqrMagnitude > Mathf.Epsilon)
-            _vSeparationDirection = vAway.normalized;
-        else if (_vSeparationDirection.sqrMagnitude <= Mathf.Epsilon)
-            _vSeparationDirection = transform.forward;
-
-        _cct.Move(_vSeparationDirection * _fPlayerSeparationSpeed * Time.deltaTime);
     }
 }
